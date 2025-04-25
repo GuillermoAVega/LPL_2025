@@ -25,4 +25,43 @@ int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngre
 	}
 	return corteIngreso;// devuelve si no se leyo nada valor de corte
 }
+
+
+char *leerCadena(char *msj_pant,int max_cad){
+	
+	printf("%s \n", msj_pant);
+	
+	char *cadena = (char *) malloc(sizeof(char) * max_cad);
+	
+	if(cadena == NULL){
+		
+		printf("Error al asignar memoria \n");
+	}
+	else{
+		if(fgets(cadena, max_cad, stdin) != NULL){
+			return cadena;
+		}
+	}
+	
+	return NULL;
+}
+
+
+float leerFloat(char *msj_pant ){
+	
+	float n;
+	
+	printf("%s",msj_pant);
+	fflush(stdin);
+	scanf("%f", &n);
+	fflush(stdin);
+	
+	return n;
+	
+}
+
+
 /// otras funciones para interaccionar con el usuario.
+
+
+
