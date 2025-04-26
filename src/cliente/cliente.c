@@ -106,7 +106,7 @@ obj_Localidad *getCliente_LocalidadObj_Impl(void *self)
  
  if(obj->localidad->findbykey(obj->localidad,obj->getCodPostal(obj))==NOT_FOUND)
    return NULL;
- return obj->localidad ;
+ return obj->localidad;
 }
 //----------------------------------------------------
 //implementacion constructor

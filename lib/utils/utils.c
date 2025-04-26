@@ -17,7 +17,7 @@ char* rtrim(char* string, char junk)
     return string;
 }
 //----------------------------------------------------
-char** fStrSplit(char *str, const char *delimiters)
+char** fStrSplit(char *str, const char *delimiters)   //Divide una cadena en varias partes usando ciertos delimitadores. Necesita liberar memoria.
 {
     char * token; 
     char **tokenArray;
@@ -39,7 +39,7 @@ char** fStrSplit(char *str, const char *delimiters)
     return tokenArray;
 }
 //----------------------------------------------------
-char* fStrJoin(char **str, const char *delimiters, int sz_opt)
+char* fStrJoin(char **str, const char *delimiters, int sz_opt)  //Concatena una cadena usando ciertos delimitadores. Necesita liberar memoria.
 {
     char *joinedStr;
     int i = 1, size=0;
@@ -64,7 +64,7 @@ char* fStrJoin(char **str, const char *delimiters, int sz_opt)
     return joinedStr;
 }
 //----------------------------------------------------
-char *str_replace(char *orig, char *rep, char *with) {
+char *str_replace(char *orig, char *rep, char *with) { //Reemplaza todas las apariciones de rep en origin por with.
     char *result; // the return string
     char *ins;    // the next insert point
     char *tmp;    // varies
@@ -110,7 +110,7 @@ char *str_replace(char *orig, char *rep, char *with) {
     return result;
 }
 //----------------------------------------------------
-PGconn * connectdb(char *servidor,char *port,char *base,char *usuario,char *password)
+PGconn * connectdb(char *servidor,char *port,char *base,char *usuario,char *password) //Conectarse a la base de datos. 
 {
    PGconn *conn;
    /*Realizar la conexion al servidor*/
@@ -123,13 +123,13 @@ PGconn * connectdb(char *servidor,char *port,char *base,char *usuario,char *pass
    return conn;
  }
 //----------------------------------------------------
-void disconnectdb(PGconn * conn)
+void disconnectdb(PGconn * conn)  //Desconectarse de la base de datos.
 {   
    /*Cerrar conexion y liberar recurso de conexion con el servidor*/
    PQfinish(conn);
 }
 //----------------------------------------------------
-char *getFecha()
+char *getFecha()   //Devuelve la fecha actual. Requiere liberar memoria.
 {
      char *ffecha;
      time_t t = time(NULL);
@@ -139,7 +139,7 @@ char *getFecha()
      return ffecha;
 }
 //----------------------------------------------------
-char *getDiaFecha(char *fechaVal)
+char *getDiaFecha(char *fechaVal)		
 {
      char *ffecha;
      time_t *tt;
@@ -206,7 +206,7 @@ static char *itoa_simple_helper(char *dest, int i) {
   return dest;
 }
 //----------------------------------------------------
-char *itoa_simple(char *dest, int i) {
+char *itoa_simple(char *dest, int i) {     
   char *s = dest;
   if (i < 0) {
     *s++ = '-';
