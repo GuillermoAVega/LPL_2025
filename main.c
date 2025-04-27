@@ -9,13 +9,7 @@
 #include <sys/stat.h>
 #include "includes/includes.h"
 
-#define LEN(x) (sizeof(x) / sizeof(x[0]))
-
-const char *menuPrincipal[] = {"Ingresos", "Actualizaciones", "Listados", "Salir"};
-const char *menuIngresos[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino", "Salir"}; //MODIFICAR SUCURSAL DESTINO.
-const char *menuActualizaciones[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino", "Salir"}; //MODIFICAR SUCURSAL DESTINO.
-const char *menuListados[] = {"Clientes", "Productos", "Medios de pago mas usados", "Productos mas pedidos", "Salir"};
-
+const char *menuPrincipal[] = {"Ingresos", "Actualizaciones", "Listados"};
 
 
 int main(int argc, char *argv[])
@@ -23,33 +17,31 @@ int main(int argc, char *argv[])
   if(!init_config(argv[POS_CONFIG]))
   	 exit(-1);  
 
-  int respuesta, i = mostrarMenu(menuPrincipal, LEN(menuPrincipal));
+  int opcion = 0; 
   
-  switch (i){
+  do{
   	
-  	case 1: 
-  		respuesta = mostrarMenu(menuIngresos, LEN(menuIngresos));
-		
-		if(respuesta == 1){  //DEBERIA SER UN SWITCH, SOLO PARA PROBAR.
+	opcion = mostrarMenu(menuPrincipal, LEN(menuPrincipal));
+	  
+	  switch (opcion){
+	  	
+	  	case 1: 
+			gestionarIngresos();
 			
-			ingresarLocalidad();
-			
-		}
- 		
-		
-  		break;
-  	
-  	case 2: 
-  		respuesta = mostrarMenu(menuActualizaciones, LEN(menuActualizaciones));		
-  		break;
-  		
-  	
-  	case 3: 
-  		respuesta = mostrarMenu(menuListados, LEN(menuListados));
-  		break;
-  		
-  		
-  }
+	  		break;
+	  	
+	  	case 2: 
+	  		gestionarActualizaciones(); //VA DENTRO - opcion = mostrarMenu(menuActualizaciones, LEN(menuActualizaciones));		
+	  		break;
+	  		
+	  	
+	  	case 3: 
+	  		//gestionarListados(); //VA DENTRO - opcion = mostrarMenu(menuListados, LEN(menuListados));
+	  		break;
+	  		
+	  	}	
+	  	
+  } while(opcion != -1);
   
   
   // ejemplo para agregar Localidad nueva.
@@ -112,6 +104,6 @@ int main(int argc, char *argv[])
   destroyObjList(list,size);
   destroyObj(loc);
   */
-  system("PAUSE");
+  //system("PAUSE");
   return 0;
 }

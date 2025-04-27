@@ -1,3 +1,18 @@
+#define LEN(x) (sizeof(x) / sizeof(x[0]))
+
 int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso );
 char *leerCadena(char *msj_pant,int max_cad);
 float leerFloat(char *msj_pant );
+
+/* Ingresos */
+void cargarMarcas();
+void cargarProducto();
+void cargarLocalidad();
+void cargarCliente();
+void cargarSucursal();
+void cargarFactura();
+void cargarDetalleFactura();
+void cargarSucursalDest();
+
+/* Listados */
+

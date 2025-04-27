@@ -9,7 +9,7 @@ static void toString_MarcaImpl(void *self)
 {
      obj_Marca *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     printf(" %d - %s \n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
 }
 
 static int getCodigoMarca_Impl(void *self)

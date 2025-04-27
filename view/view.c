@@ -8,6 +8,8 @@
 #include "../includes/includes.h"
 
 
+
+
 int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso )
 {
 	int valor;
@@ -61,6 +63,21 @@ float leerFloat(char *msj_pant ){
 	
 }
 
+int confirma(char *msj_pant){
+	
+	char c;
+	
+	do{
+		printf("%s \n", msj_pant);
+		fflush(stdin);
+		c = getchar();
+		
+	} while ( c != 's' && c != 'S' && c != 'n' && c != 'N');
+	
+	
+	return (c == 's' || c == 'S');
+}
+
 
 int mostrarMenu(char *opciones[], int cantidadOpciones){
 	
@@ -68,6 +85,7 @@ int mostrarMenu(char *opciones[], int cantidadOpciones){
 	
 	system("cls");	
 	
+	printf("---------------------------------\n");
 	printf("Ingrese segun desee: \n");
 		
 	for (i = 0; i < cantidadOpciones; i++){
@@ -75,37 +93,17 @@ int mostrarMenu(char *opciones[], int cantidadOpciones){
 		printf("%d - %s \n", i + 1, opciones[i]);
 	
 	}
-	
+	printf("---------------------------------\n");
+	printf("Ingrese -1 para salir \n");	
+	printf("---------------------------------\n");
 	respuesta = leerEntero("", 0, 1, cantidadOpciones, -1);
-		
-		
+	
 	return (respuesta);
 }
 
-void ingresarLocalidad(){
-	
-	int codPostal = leerEntero("Ingrese el codigo postal de la localidad \n",1,  0, 10000, -1);	
-	char *nombre;
-	obj_Localidad *loc = Localidad_new();
-	
-	if(loc->findbykey(loc, codPostal) == NOT_FOUND){
-		system("cls");
-		nombre = leerCadena("Ingrese el nombre de la localidad \n", 50);
 
-		loc-> setCodpostal(loc, codPostal);
-		loc-> setNombre(loc, nombre);
-
-		if(loc->saveObj(loc) == true)
-			printf("Ingreso exitoso");
-			
-		destroyObj(loc);			
-	}
-	else{
-		printf("Ya existe una localidad con ese codigo postal \n");
-	}
 	
-	free(nombre);
-}
+
 
 
 /// otras funciones para interaccionar con el usuario.

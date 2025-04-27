@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o
-LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o
+OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o
+LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o
 LIBS     = -L"C:/Program Files/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -L"C:/Program Files (x86)/PostgreSQL/9.2/include" "../../../../../../../../../../Program Files (x86)/PostgreSQL/9.2/lib/libpq.lib" -m32 -g3
 INCS     = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
 CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
@@ -83,3 +83,12 @@ src/track_viaje/track_viaje.o: src/track_viaje/track_viaje.c
 
 src/sucursal_dest/sucursal_dest.o: src/sucursal_dest/sucursal_dest.c
 	$(CC) -c src/sucursal_dest/sucursal_dest.c -o src/sucursal_dest/sucursal_dest.o $(CFLAGS)
+
+view/Ingresos.o: view/Ingresos.c
+	$(CC) -c view/Ingresos.c -o view/Ingresos.o $(CFLAGS)
+
+view/Actualizaciones.o: view/Actualizaciones.c
+	$(CC) -c view/Actualizaciones.c -o view/Actualizaciones.o $(CFLAGS)
+
+view/Listados.o: view/Listados.c
+	$(CC) -c view/Listados.c -o view/Listados.o $(CFLAGS)

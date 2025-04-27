@@ -9,7 +9,7 @@ static void toString_CategoriaImpl(void *self)
 {
      obj_Categoria *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     printf("%d - %s \n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
 }
 
 static int getCodigoCategoria_Impl(void *self)
