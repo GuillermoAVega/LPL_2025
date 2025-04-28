@@ -10,7 +10,7 @@ static void toString_SucursalImpl(void *self)
 {
      obj_Sucursal *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     printf("%d - %s \n", obj->getCodigo(obj), obj->getNombre(obj)); 
 }
 
 static int getCodigoSucursal_Impl(void *self)

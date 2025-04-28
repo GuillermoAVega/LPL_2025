@@ -24,9 +24,58 @@ const char *menuIngresos[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucu
 
 
 //Implementado por franco y emi.
-void cargarMarcas(){
-};
+void cargarMarca(){
+	static int cod = 0;
+	char *descripcion = leerCadena("Ingrese una descripcion para la marca:\n",50);
+	
+	obj_Marca *marca = Marca_new();
+	marca->setCodigo(marca,cod++);
+	marca->setDescripcion(marca,descripcion);
+	
+	if(marca->saveObj(marca) == true){
+		printf("Ingreso exitoso.\n");
+	}
+	else
+		printf("Error al ingresar la marca\n");
+	
+	destroyObj(marca);
+	free(descripcion);
+	
+}
+
 void cargarSucursal(){
+	static int codigo = 0;
+	int cod_postal = leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);	
+	obj_Localidad *loc = Localidad_new();
+	
+	if (loc->findbykey(loc,cod_postal) != NOT_FOUND){
+		obj_Sucursal *suc = Sucursal_new();
+		
+		char *nombre = leerCadena("Ingrese nombre de la sucursal:\n",50);
+		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n",120);
+		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n",25);
+		
+		suc->setCodigo(suc,codigo++);
+		suc->setNombre(suc,nombre);
+		suc->setDireccion(suc,direccion);
+		suc->setTelefono(suc,telefono);
+		suc->setCodPostal(suc,cod_postal);
+		
+		if (suc->saveObj(suc) == true){
+			printf("Ingreso exitoso\n");
+		}
+		else
+			printf("Error al ingresar la sucursal\n");
+		
+		free(nombre);
+		free(direccion);
+		free(telefono);	
+		destroyObj(suc);
+	}else
+		printf("No existe la localidad ingresada.\n");
+	
+
+	destroyObj(loc);
 };
 void cargarFactura(){
 };
@@ -83,7 +132,6 @@ void mostrarObjetos( void *(*constructor)() ){
 	}
 	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
 	destroyObj(obj);
-	
 	
 }
 
@@ -230,7 +278,7 @@ void gestionarIngresos(){
 			break;
 		
 		case 2:
-			cargarMarcas();
+			cargarMarca();
 			break;
 		
 		case 3:
@@ -240,7 +288,7 @@ void gestionarIngresos(){
 		case 4:
 			cargarCliente();
 			break;
-		
+			
 		case 5:
 			cargarSucursal();
 			break;

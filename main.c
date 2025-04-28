@@ -11,7 +11,6 @@
 
 const char *menuPrincipal[] = {"Ingresos", "Actualizaciones", "Listados"};
 
-
 int main(int argc, char *argv[])
 {  
   if(!init_config(argv[POS_CONFIG]))
