@@ -138,7 +138,7 @@ static void *init_Producto(void *self)
   // implementar detroy internal para liberar recursos  
   obj->destroyInternal 	= destroyInternalPRO_Impl;
   //---- acceso a relaciones  
-    obj->getCategoriaObj  = getProducto_CategoriaObj_Impl;
+  obj->getCategoriaObj  = getProducto_CategoriaObj_Impl;
   obj->getMarcaObj  = getProducto_MarcaObj_Impl;
 
   return obj;

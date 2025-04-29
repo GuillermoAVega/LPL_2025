@@ -11,7 +11,7 @@ static void toString_ClienteImpl(void *self)
      obj_Cliente *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
      obj_Localidad *loc = obj->getLocalidadObj(obj);
-	 printf("%s - %s - %s\n",obj->getCuil(obj),obj->getUsuario(obj),loc->getNombre(loc)); 
+	 printf("Cuil: %s - %s - %s\n",obj->getCuil(obj),obj->getUsuario(obj),loc->getNombre(loc)); 
 }
 
 static int getCodigoCliente_Impl(void *self)

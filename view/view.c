@@ -7,7 +7,7 @@
 #include <fcntl.h>
 #include "../includes/includes.h"
 
-
+#define LEN(x) (sizeof(x) / sizeof(x[0]))
 
 
 int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso )
@@ -20,6 +20,7 @@ int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngre
 		printf(msj_pant);
 		fflush(stdin);
 		scanf("%d",&valor);
+		fflush(stdin);
 		if(valor>=minVal && valor<=maxVal)
 			return valor;
 		if(valor == corteIngreso)
@@ -84,7 +85,6 @@ int mostrarMenu(char *opciones[], int cantidadOpciones){
 	int i, respuesta;
 	
 	system("cls");	
-	
 	printf("---------------------------------\n");
 	printf("Ingrese segun desee: \n");
 		
