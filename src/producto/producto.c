@@ -11,7 +11,7 @@ static void toString_ProductoImpl(void *self)
 {
      obj_Producto *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     printf("Codigo: %d - %s - $%.2f \n", obj->getCodigo(obj), obj->getDescripcion(obj), obj->getPrecio(obj)); 
 }
 
 static int getCodigoProducto_Impl(void *self)
@@ -83,9 +83,22 @@ static void destroyInternalPRO_Impl(void *self)
 obj_Categoria *getProducto_CategoriaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-}obj_Marca *getProducto_MarcaObj_Impl(void *self)
+ obj->categoria = Categoria_new();
+
+ if(obj->categoria->findbykey(obj->categoria,obj->getCodCategoria(obj))==NOT_FOUND)
+   return NULL;
+ return obj->categoria;
+ 
+}
+
+obj_Marca *getProducto_MarcaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj->marca = Marca_new();
+ 
+  if(obj->marca->findbykey(obj->marca,obj->getCodMarca(obj))==NOT_FOUND)
+   return NULL;
+ return obj->marca;
 }
 //----------------------------------------------------
 //implementacion constructor

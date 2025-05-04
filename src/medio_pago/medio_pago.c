@@ -10,7 +10,7 @@ static void toString_MedioPagoImpl(void *self)
 {
      obj_MedioPago *obj=this(self);      
      // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     printf("%d - %s \n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
 }
 
 static int getCodigoMedioPago_Impl(void *self)

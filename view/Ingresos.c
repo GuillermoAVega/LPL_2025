@@ -25,6 +25,7 @@ void mostrarObjetos( void *(*constructor)() ){
 		itm = ((Object **)list)[i];
 		((Object *)itm)->toString(itm);
 	}
+	
 	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
 	destroyObj(obj);
 	
@@ -33,11 +34,10 @@ void mostrarObjetos( void *(*constructor)() ){
 
 int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 	
-	int codigo, reintentar;
+	int codigo, reintentar = 1;
 	Object *obj = constructor();
 			
 	do{
-		system("cls");
 		printf("%s\n", msj_pant);
 		mostrarObjetos( (void *) constructor); //Muestra todas las marcas.
 		codigo = leerEntero("Ingrese el codigo asociado segun corresponda \n", 0, 0, 10000, -1);

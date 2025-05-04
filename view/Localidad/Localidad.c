@@ -12,8 +12,8 @@ void cargarLocalidad(){
 		
 		char *nombre = leerCadena("Ingrese el nombre de la localidad \n", MAX60); 
 
-		loc-> setCodpostal(loc, codPostal);
-		loc-> setNombre(loc, nombre);
+		loc->setCodpostal(loc, codPostal);
+		loc->setNombre(loc, nombre);
 
 		if(loc->saveObj(loc) == true)
 			printf("Ingreso de localidad realizado con exito \n");

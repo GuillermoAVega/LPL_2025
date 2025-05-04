@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	  		
 	  	
 	  	case 3: 
-	  		//gestionarListados(); //VA DENTRO - opcion = mostrarMenu(menuListados, LEN(menuListados));
+	  		gestionarListados(); //VA DENTRO - opcion = mostrarMenu(menuListados, LEN(menuListados));
 	  		break;
 	  		
 	  	}	

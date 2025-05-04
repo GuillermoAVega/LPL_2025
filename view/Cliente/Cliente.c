@@ -1,91 +1,195 @@
 #include "Cliente.h"
 
+#define TRUE 1
+#define FALSE 0
 
+//Retorna el codigo del cliente con ese cuil. -1 si no existe.
+int buscarCliente(char *cuilIngresado){   
+	
+	obj_Cliente *cliente = Cliente_new();
+	void *list, *item;
+	int codigo = -1;
+	int i = 0; 
+	int size = cliente->findAll(cliente,&list,NULL);    
+		
+	while (i < size) {
+		item = ((Object **)list)[i];    
 
-
-const char *menuModificarCliente[] = {"Usuario", "Clave", "Cuil", "Razon Social", "Direccion", "Codigo Postal", "Email", "Celular"};
-
+		if (strcmp(cuilIngresado, ((obj_Cliente *)item)->getCuil(item)) == 0) {
+			codigo = ((obj_Cliente *)item)->getCodigo(item);
+			break;
+		}
+		i++;
+	}	
+	
+    destroyObjList(list,size);
+    destroyObj(cliente);
+	return codigo;
+}
+	
 
 void cargarCliente(){
 	static int codigo = 0;
-	codigo++;
-	
+
 	//Pido los datos.
-	char *usuario = leerCadena("Ingrese el nombre del usuario \n", MAX90); // 90 CARACTERES - Definido en Cliente.h
-	char *clave = leerCadena("Ingrese la clave \n", MAX120);  //120 CARACTERES - Definido en Cliente.h
-	int codPostal = leerEntero("Ingrese el codigo postal \n",0,0,10000,-1); //INT - Definido en Cliente.h
+	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h	
 	
-	obj_Localidad *loc = Localidad_new();
-	
-	if(loc->findbykey(loc, codPostal) == NOT_FOUND){
+	if (buscarCliente(cuil) != -1){
+		printf("Ya existe un cliente registrado con ese cuit \n");
+	}
+	else{
 		
-		if (confirma("La localidad ingresada no se encuentra registrada. Desea cargarla? s/n ")){
-			cargarLocalidad();
-		}
-		else{
+		int codPostal = leerEntero("Ingrese el codigo postal \n",0,0,10000,-1); //INT - Definido en Cliente.h	
+	
+		obj_Localidad *loc = Localidad_new();
+		if(loc->findbykey(loc, codPostal) != NOT_FOUND){
+			
+			char *usuario = leerCadena("Ingrese el nombre del usuario \n", MAX90); // 90 CARACTERES - Definido en Cliente.h
+			char *clave = leerCadena("Ingrese la clave \n", MAX120);  //120 CARACTERES - Definido en Cliente.h
+			char *razonSocial = leerCadena("Ingrese la razon social \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
+			char *direccion = leerCadena("Ingrese la direccion \n", MAX120); //120 CARACTERES - Definido en Cliente.h
+			char *email = leerCadena("Ingrese el mail \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
+			char *celular = leerCadena("Ingrese el numero de telefono \n", MAX25); //25 CARACTERES - Definidos en Cliente.h
+			
+			//Creo el objeto cliente.
+			obj_Cliente *cliente = Cliente_new();
+		
+			//Seteo sus atributos.
+			cliente->setUsuario(cliente,usuario);
+			cliente->setClave(cliente, clave);
+			cliente->setCodigo(cliente, codigo++);
+			cliente->setCuil(cliente, cuil);
+			cliente->setRazonSocial(cliente, razonSocial);
+			cliente->setDireccion(cliente, direccion);
+			cliente->setCodPostal(cliente, codPostal);
+			cliente->setEmail(cliente, email) ;
+			cliente->setCelular(cliente, celular);
+			
+			//Guardo al cliente en la BD.
+			if(cliente->saveObj(cliente) == true)
+				printf("Ingreso de cliente realizado con exito \n");
+			else
+				printf("Error al ingresar el cliente en la base de datos \n");		
+			
+			//Libero memoria.
 			free(usuario);
 			free(clave);
-			return;
+			free(usuario);
+			free(clave);
+			free(razonSocial);
+			free(direccion);
+			free(email);
+			free(celular);	
+			destroyObj(loc);
+			destroyObj(cliente);
 		}
+		else{
+			printf("No existe la localidad ingresada");
+		}			
 	}
-	
-	//RESTA VALIDAR QUE NO HAYA OTRA PERSONA CON ESE CUIT.
-	
-	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h	
-	char *razonSocial = leerCadena("Ingrese la razon social \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
-	char *direccion = leerCadena("Ingrese la direccion \n", MAX120); //120 CARACTERES - Definido en Cliente.h
-	char *email = leerCadena("Ingrese el mail \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
-	char *celular = leerCadena("Ingrese el numero de telefono \n", MAX25); //25 CARACTERES - Definidos en Cliente.h
-	
-
-	//Creo el objeto cliente.
-	obj_Cliente *cliente = Cliente_new();
-
-	
-	//Seteo sus atributos.
-	cliente->setUsuario(cliente,usuario);
-	cliente->setClave(cliente, clave);
-	cliente->setCodigo(cliente, codigo);
-	cliente->setCuil(cliente, cuil);
-	cliente->setRazonSocial(cliente, razonSocial);
-	cliente->setDireccion(cliente, direccion);
-	cliente->setCodPostal(cliente, codPostal);
-	cliente->setEmail(cliente, email) ;
-	cliente->setCelular(cliente, celular);
-	
-	//Guardo al cliente en la BD.
-	if(cliente->saveObj(cliente) == true)
-		printf("Ingreso de cliente realizado con exito \n");
-			
-	
-	//Libero memoria.
-	destroyObj(loc);
-	destroyObj(cliente);
-	free(usuario);
-	free(clave);
 	free(cuil);
-	free(razonSocial);
-	free(direccion);
-	free(email);
-	free(celular);
+	system("PAUSE");
 }
 
 
-
-
 void modificarCliente(){
+	
+	const char *menuModificarCliente[] = {"Usuario", "Clave", "Cuil", "Razon Social", "Direccion", "Codigo Postal", "Email", "Celular"};
 
 	printf("Los clientes cargados son: \n");
-	mostrarObjetos( (void *) Cliente_new);
-		
-	int cuil, opcion;
-	cuil = ingresarCodigo((void *) Cliente_new, "Ingrese el cuil del cliente que desea modificar");	
-	
-	if (cuil == -1)
-		return;
-	
-	opcion = mostrarMenu(menuModificarCliente, LEN(menuModificarCliente));
+	mostrarObjetos((void *) Cliente_new);
 
+	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h					
+	int opcion, codigo = buscarCliente(cuil);
+
+	if(codigo != -1){
+		
+		obj_Cliente *cliente = Cliente_new();
+		cliente->findbykey(cliente, codigo);
+		
+		opcion = mostrarMenu(menuModificarCliente, LEN(menuModificarCliente));
+		
+		switch (opcion){
+			
+			case 1: {
+				char *usuario = leerCadena("Ingrese el nuevo nombre de usuario \n", MAX90);	
+				cliente->setUsuario(cliente, usuario);
+				free(usuario);
+				break;
+			}
+				
+			case 2:{
+				char *clave = leerCadena("Ingrese la nueva clave del usuario \n", MAX120);	
+				cliente->setClave(cliente, clave);
+				free(clave);	
+				break;
+			}
+			case 3: {
+				char *nuevoCuil = leerCadena("Ingrese el nuevo cuil del usuario \n", MAX20);	
+				if(buscarCliente(nuevoCuil) == -1){
+					cliente->setCuil(cliente, nuevoCuil);
+					free(nuevoCuil);	
+				}
+				else{
+					printf("Ya existe un cliente con ese cuil \n");
+					free(nuevoCuil);	
+					system("PAUSE");
+					return;
+				}
+				break;
+			}
+			
+			case 4: {
+				char *razonSocial = leerCadena("Ingrese la nueva razon social del usuario \n", MAX90);	
+				cliente->setRazonSocial(cliente, razonSocial);
+				free(razonSocial);	
+				break;	
+			}
+		
+			case 5: {
+				char *direccion = leerCadena("Ingrese la nueva direccion del usuario \n", MAX120);	
+				cliente->setDireccion(cliente, direccion);
+				free(direccion);		
+				break;
+			} 
+			
+		
+			case 6: {
+	
+				int codPostal = ingresarCodigo((void *) Localidad_new, "Las localidades registradas son: " );
+				if(codPostal == -1)
+					return;
+				cliente->setCodPostal(cliente, codPostal);
+				break;
+			}
+			
+			case 7: {
+				char *email = leerCadena("Ingrese el nuevo mail del usuario \n", MAX90);	
+				cliente->setEmail(cliente, email);
+				free(email);	
+				break;
+			}
+			
+			case 8: {
+				char *celular = leerCadena("Ingrese el nuevo celular del usuario \n", MAX25);	
+				cliente->setCelular(cliente, celular);
+				free(celular);	
+				break;
+			}
+		
+		}
+		
+		if(cliente->saveObj(cliente) == true)
+			printf("Modificacion al cliente realizada con exito \n");
+		
+		destroyObj(cliente);
+	}
+	else{
+		printf("No existe un cliente con ese numero de cuil \n");
+	}
+	free(cuil);
+	system("PAUSE");
+		
 }
 
 
