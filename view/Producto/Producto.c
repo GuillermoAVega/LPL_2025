@@ -9,10 +9,8 @@ void cargarProducto(){
 	int codMarca, codCategoria;
 	
 	codMarca = ingresarCodigo((void *) Marca_new ,  "Las marcas registradas son: ");	
-	if(codMarca == -1)
-		return;	
 	codCategoria = ingresarCodigo((void *) Categoria_new, "Las categorias registradas son: " );
-	//	if ()
+	
 
 	//Solicito valores para registrar el producto.
 	char *descripcion = leerCadena("Ingrese la descripcion \n", MAX80);  //80 CARACTERES	
@@ -34,8 +32,6 @@ void cargarProducto(){
 		printf("Ingreso del producto realizado con exito \n");
 		
 	destroyObj(producto);
-
-	
 	free(descripcion);
 	
 }

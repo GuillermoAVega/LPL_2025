@@ -6,12 +6,23 @@
 THIS(obj_Cliente)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_ClienteImpl(void *self)
-{
-     obj_Cliente *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     obj_Localidad *loc = obj->getLocalidadObj(obj);
-	 printf("Cuil: %s - %s - %s\n",obj->getCuil(obj),obj->getUsuario(obj),loc->getNombre(loc)); 
+char* toString_ClienteImpl(void *self)
+{	//char cadena[200];
+	//faltan datos
+	
+     obj_Cliente *obj=this(self);   
+	 obj_Localidad *loc = obj->getLocalidadObj(obj);
+	 char *cadena = loc->getNombre(loc);
+	 
+     int size = snprintf(NULL, 0, "%d - %s - %s -%s" , obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj), loc->getNombre(loc)); 
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s - %s -%s", obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj),loc->getNombre(loc));
+	
+	 destroyObj(loc);
+     return resultado;
+	
 }
 
 static int getCodigoCliente_Impl(void *self)

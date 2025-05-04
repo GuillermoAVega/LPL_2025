@@ -17,7 +17,7 @@ void cargarLocalidad(){
 
 		if(loc->saveObj(loc) == true)
 			printf("Ingreso de localidad realizado con exito \n");
-			
+			getch();
 		free(nombre);
 	}
 	else{
@@ -29,8 +29,7 @@ void cargarLocalidad(){
 
 void modificarLocalidad(){
 
-	mostrarObjetos( (void *) Localidad_new);
-	int codPostal = ingresarCodigo((void *) Localidad_new, "Ingrese el codigo postal de la localidad que desea modificar \n");	
+	int codPostal = ingresarCodigo((void *) Localidad_new, "Ingrese el codigo postal de la localidad que desea modificar: \n");	
 	
 	if (codPostal == -1)
 		return;
@@ -44,7 +43,7 @@ void modificarLocalidad(){
 	
 	if(localidad->saveObj(localidad) == true)
 		printf("Actualizacion de la localidad realizada con exito \n");
-			
+		getch();	
 	
 	free(nombreLocalidad);
 	destroyObj(localidad);

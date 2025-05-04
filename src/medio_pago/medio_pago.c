@@ -6,11 +6,16 @@
 THIS(obj_MedioPago)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_MedioPagoImpl(void *self)
+char* toString_MedioPagoImpl(void *self)
 {
+	//falta banco y m_pago
      obj_MedioPago *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj));
+     
+     return resultado;
 }
 
 static int getCodigoMedioPago_Impl(void *self)

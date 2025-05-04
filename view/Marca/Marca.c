@@ -22,8 +22,7 @@ void cargarMarca(){
 
 
 void modificarMarca() {
-	
-	mostrarObjetos( (void *) Marca_new);
+
 	int cod = ingresarCodigo((void *) Marca_new, "Ingrese el codigo de la marca que desea modificar:\n");	
 	
 	obj_Marca *marca = Marca_new();

@@ -76,7 +76,6 @@ void cargarCliente(){
 void modificarCliente(){
 
 	printf("Los clientes cargados son: \n");
-	mostrarObjetos( (void *) Cliente_new);
 		
 	int cuil, opcion;
 	cuil = ingresarCodigo((void *) Cliente_new, "Ingrese el cuil del cliente que desea modificar");	

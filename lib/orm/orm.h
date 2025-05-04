@@ -32,7 +32,7 @@ typedef struct
  size_t sizeObj;
  void *constructor;
  int  (*findAll)(void *self, void **list,char *criteria);
- void (*toString)(void *self);
+ char* (*toString)(void *self);
  bool (*getIsNewObj)(void *self);
  bool (*saveObj)(void *self);
  void (*destroyInternal)(void *self);

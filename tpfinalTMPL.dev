@@ -400,27 +400,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit36]
-FileName=src\sucursal\sucursal.c
-CompileCpp=0
-Folder=src/sucursal
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit37]
-FileName=src\sucursal\sucursal.h
-CompileCpp=0
-Folder=src/sucursal
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit38]
 FileName=src\track_viaje\track_viaje.c
 CompileCpp=0
 Folder=src/track_viaje
@@ -430,7 +410,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit39]
+[Unit38]
 FileName=src\track_viaje\track_viaje.h
 CompileCpp=0
 Folder=src/track_viaje
@@ -440,7 +420,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit40]
+[Unit39]
 FileName=src\sucursal_dest\sucursal_dest.c
 CompileCpp=0
 Folder=src/sucursal_dest
@@ -450,7 +430,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit41]
+[Unit40]
 FileName=src\sucursal_dest\sucursal_dest.h
 CompileCpp=0
 Folder=src/sucursal_dest
@@ -460,7 +440,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit42]
+[Unit41]
 FileName=view\Ingresos.c
 CompileCpp=0
 Folder=view
@@ -470,7 +450,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit43]
+[Unit42]
 FileName=view\Actualizaciones.c
 CompileCpp=0
 Folder=view
@@ -480,7 +460,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit44]
+[Unit43]
 FileName=view\Listados.c
 CompileCpp=0
 Folder=view
@@ -490,7 +470,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit45]
+[Unit44]
 FileName=view\Cliente\Cliente.c
 CompileCpp=0
 Folder=view/Cliente
@@ -500,7 +480,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit46]
+[Unit45]
 FileName=view\Cliente\Cliente.h
 CompileCpp=0
 Folder=view/Cliente
@@ -510,7 +490,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit47]
+[Unit46]
 FileName=view\Sucursal_det\Sucursal_det.c
 CompileCpp=0
 Folder=view/Sucursal_Det
@@ -520,7 +500,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit48]
+[Unit47]
 FileName=view\Sucursal_det\Sucursal_det.h
 CompileCpp=0
 Folder=view/Sucursal_Det
@@ -530,7 +510,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit49]
+[Unit48]
 FileName=view\Sucursal\Sucursal.c
 CompileCpp=0
 Folder=view/Sucursal
@@ -540,7 +520,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit50]
+[Unit49]
 FileName=view\Sucursal\Sucursal.h
 CompileCpp=0
 Folder=view/Sucursal
@@ -550,7 +530,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit51]
+[Unit50]
 FileName=view\Producto\Producto.c
 CompileCpp=0
 Folder=view/Producto
@@ -561,26 +541,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit52]
-FileName=view\Producto\Producto.h
-CompileCpp=0
-Folder=view/Producto
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit53]
-FileName=view\Marca\Marca.c
-CompileCpp=0
-Folder=view/Marca
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit54]
 FileName=view\Marca\Marca.h
 CompileCpp=0
 Folder=view/Marca
@@ -590,7 +550,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit55]
+[Unit53]
 FileName=view\Localidad\Localidad.c
 CompileCpp=0
 Folder=view/Localidad
@@ -600,7 +560,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit56]
+[Unit54]
 FileName=view\Localidad\Localidad.h
 CompileCpp=0
 Folder=view/Localidad
@@ -610,7 +570,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit57]
+[Unit55]
 FileName=view\Factura\Factura.c
 CompileCpp=0
 Folder=view/Factura
@@ -620,7 +580,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit58]
+[Unit56]
 FileName=view\Factura\Factura.h
 CompileCpp=0
 Folder=view/Factura
@@ -630,7 +590,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit59]
+[Unit57]
 FileName=view\Detalle_Factura\Detalle_Factura.c
 CompileCpp=0
 Folder=view/Detalle_Factura
@@ -640,10 +600,50 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit60]
+[Unit58]
 FileName=view\Detalle_Factura\Detalle_Factura.h
 CompileCpp=0
 Folder=view/Detalle_Factura
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit59]
+FileName=..\..\LPL_2025 copia\src\sucursal\sucursal.c
+CompileCpp=0
+Folder=src/sucursal
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit60]
+FileName=..\..\LPL_2025 copia\src\producto\producto.h
+CompileCpp=0
+Folder=view/Producto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit36]
+FileName=src\sucursal\sucursal.h
+CompileCpp=0
+Folder=src/sucursal
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit51]
+FileName=view\Marca\Marca.c
+CompileCpp=0
+Folder=view/Marca
 Compile=1
 Link=1
 Priority=1000

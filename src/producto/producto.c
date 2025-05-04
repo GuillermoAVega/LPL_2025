@@ -7,11 +7,24 @@
 THIS(obj_Producto)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_ProductoImpl(void *self)
+char* toString_ProductoImpl(void *self)
 {
-     obj_Producto *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+	
+     obj_Producto *obj=this(self);
+     obj_Marca *mar = obj->getMarcaObj(obj);
+     char *cadena = mar->getDescripcion(mar);
+     printf("%s",cadena);
+     int size = snprintf(NULL, 0, "%d - %s - stock: %.2f - marca:%s \n", obj->getCodigo(obj), obj->getDescripcion(obj),
+	 	 														obj->getStock(obj), mar->getDescripcion(mar));	
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     
+	 sprintf(resultado, "%d - %s - stock: %.2f - marca:%s \n", obj->getCodigo(obj), obj->getDescripcion(obj),
+	 	 														obj->getStock(obj), mar->getDescripcion(mar));
+     
+     return resultado;
+     
 }
 
 static int getCodigoProducto_Impl(void *self)
@@ -83,10 +96,14 @@ static void destroyInternalPRO_Impl(void *self)
 obj_Categoria *getProducto_CategoriaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-}obj_Marca *getProducto_MarcaObj_Impl(void *self)
+}
+obj_Marca getProducto_MarcaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+
 }
+
+
 //----------------------------------------------------
 //implementacion constructor
 //----------------------------------------------------
