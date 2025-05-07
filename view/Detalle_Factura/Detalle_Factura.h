@@ -8,3 +8,7 @@
 #include "../../includes/includes.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#define LIMPIAR 0
+#define MIN_VAL 0
+#define MAX_CODIGO 10000
+#define CORTE_INGRESO -1
