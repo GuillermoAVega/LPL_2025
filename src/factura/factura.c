@@ -84,10 +84,23 @@ static void destroyInternalFAC_Impl(void *self)
 //----------------------------------------------------
 obj_Cliente *getFactura_ClienteObj_Impl(void *self)
 {
- obj_Factura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-}obj_MedioPago *getFactura_MedioPagoObj_Impl(void *self)
+ obj_Factura *obj = this(self);        //acceso a la informacion relacionada   
+ obj->cliente = Cliente_new();
+ 
+ if(obj->cliente->findbykey(obj->cliente,obj->getCodCliente(obj))==NOT_FOUND)
+   return NULL;
+ return obj->cliente;
+}
+
+
+obj_MedioPago *getFactura_MedioPagoObj_Impl(void *self)
 {
- obj_Factura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_Factura *obj = this(self);        //acceso a la informacion relacionada  
+ obj->medio_pago = MedioPago_new();
+ 
+ if(obj->medio_pago->findbykey(obj->medio_pago,obj->getCodMpago(obj))==NOT_FOUND)
+   return NULL;
+ return obj->medio_pago; 
 }
 //----------------------------------------------------
 //implementacion constructor

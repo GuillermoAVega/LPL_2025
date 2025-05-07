@@ -49,7 +49,13 @@ static void destroyInternalMED_Impl(void *self)
 //----------------------------------------------------
 obj_Banco *getMedioPago_BancoObj_Impl(void *self)
 {
- obj_MedioPago *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_MedioPago *obj = this(self);        //acceso a la informacion relacionada   return NULL; 
+ obj->banco = Banco_new();
+ 
+ if(obj->banco->findbykey(obj->banco,obj->getCodBanco(obj))==NOT_FOUND)
+   return NULL;
+ return obj->banco;
+ 
 }
 //----------------------------------------------------
 //implementacion constructor

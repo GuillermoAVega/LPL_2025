@@ -47,12 +47,22 @@ static void destroyInternalSUC_Impl(void *self)
 obj_Sucursal *getSucursalDest_SucursalObjO_Impl(void *self)
 {
  obj_SucursalDest *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_o = Sucursal_new();
+ 
+ if(obj->sucursal_o->findbykey(obj->sucursal_o,obj->getCodSucO(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_o;
+
 }
+
 obj_Sucursal *getSucursalDest_SucursalObjD_Impl(void *self)
 {
  obj_SucursalDest *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_d = Sucursal_new();
+ 
+ if(obj->sucursal_d->findbykey(obj->sucursal_d,obj->getCodSucD(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_d;
 }
 //----------------------------------------------------
 int getKmSucursalDest_Impl(void *self)

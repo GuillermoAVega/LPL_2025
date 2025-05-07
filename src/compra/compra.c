@@ -61,7 +61,12 @@ static void destroyInternalCOM_Impl(void *self)
 //----------------------------------------------------
 obj_Factura *getCompra_FacturaObj_Impl(void *self)
 {
- obj_Compra *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_Compra *obj = this(self);        //acceso a la informacion relacionada  
+ obj->factura = Factura_new();
+ 
+ if(obj->factura->findbykey(obj->factura, obj->getCodFactura(obj))==NOT_FOUND)
+   return NULL;
+ return obj->factura;
 }
 //----------------------------------------------------
 //implementacion constructor
