@@ -133,35 +133,8 @@ void listarClientes() {
 	
 }
 
-
-void gestionarListados(){
-
-	const char *menuListados[] = {"Clientes", "Productos", "Medios de pago mas usados", "Productos mas pedidos"};
-	
-	int opcion = mostrarMenu(menuListados, LEN(menuListados));
-  	system("cls");
-  	
-	switch(opcion){
-		case 1:
-			listarClientes();
-			break;
-		
-		case 2:
-			//listarProductos();
-			break;
-		
-		case 3:
-			//listarMediosPago;
-			break;
-		
-		case 4:
-			//modificarCliente();
-			break;
-	}
-}
-
 //Los productos con posibilidad de orden por /categoria 
-void listadoProductos(){
+void listarProductos(){
 	int respuesta = leerEntero("�Quiere ver todos los productos(1) o ver por categorias(2)?\n", 1, 1, 2, -1);
 	if (respuesta == 1){
 		printf("Los productos cargados son: \n");
@@ -184,10 +157,37 @@ void listadoProductos(){
 		destroyObj(prod); // liberar Recurso 
 		
 		getch();
-		
-
 	}
-	
 }
+
+
+
+void gestionarListados(){
+
+	const char *menuListados[] = {"Clientes", "Productos", "Medios de pago mas usados", "Productos mas pedidos"};
+	
+	int opcion = mostrarMenu(menuListados, LEN(menuListados));
+  	system("cls");
+  	
+	switch(opcion){
+		case 1:
+			listarClientes();
+			break;
+		
+		case 2:
+			listarProductos();
+			break;
+		
+		case 3:
+			//listarMediosPago;
+			break;
+		
+		case 4:
+			//modificarCliente();
+			break;
+	}
+}
+
+
 
 

@@ -611,7 +611,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit59]
-FileName=..\..\LPL_2025 copia\src\sucursal\sucursal.c
+FileName=src\sucursal\sucursal.c
 CompileCpp=0
 Folder=src/sucursal
 Compile=1
@@ -621,7 +621,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit60]
-FileName=..\..\LPL_2025 copia\src\producto\producto.h
+FileName=view\Producto\Producto.h
 CompileCpp=0
 Folder=view/Producto
 Compile=1
