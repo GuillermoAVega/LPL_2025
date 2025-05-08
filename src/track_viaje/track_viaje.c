@@ -12,11 +12,19 @@
 THIS(obj_TrackViaje)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_TrackViajeImpl(void *self)
+char* toString_TrackViajeImpl(void *self)
 {
      obj_TrackViaje *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     /*
+     obj_SucursalDest *obj=this(self);      
+     int size = snprintf(NULL, 0, "%d - %s\n", obj->); 
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s\n", obj->);
+     
+     return resultado;
+     */
 }
 
 static int getCodigoTrackViaje_Impl(void *self)

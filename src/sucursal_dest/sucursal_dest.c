@@ -7,11 +7,18 @@
 THIS(obj_SucursalDest)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_SucursalDestImpl(void *self)
+char* toString_SucursalDestImpl(void *self)
 {
+	/*
      obj_SucursalDest *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     int size = snprintf(NULL, 0, "%d - %s\n", obj->); 
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s\n", obj->);
+     
+     return resultado;
+     */
 }
 
 static int getCodSucOSucursalDest_Impl(void *self)

@@ -23,9 +23,13 @@ void mostrarObjetos( void *(*constructor)() ){
 	for(i=0;i<size;++i)
 	{
 		itm = ((Object **)list)[i];
-		((Object *)itm)->toString(itm);
+		char *str = ((Object *)itm)->toString(itm);
+		printf("%s",str);
+		free(str);
+		
 	}
 	
+	system("PAUSE");
 	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
 	destroyObj(obj);
 	
@@ -39,8 +43,8 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 			
 	do{
 		printf("%s\n", msj_pant);
-		mostrarObjetos( (void *) constructor); //Muestra todas las marcas.
-		codigo = leerEntero("Ingrese el codigo asociado segun corresponda \n", 0, 0, 10000, -1);
+		mostrarObjetos( (void *) constructor); 
+		codigo = leerEntero("", 0, 0, 10000, -1);
 	
 	} while ((obj->findbykey(obj,codigo) == NOT_FOUND) && (reintentar = confirma("El codigo ingresado no se encuentra registrado. Desea reintentarlo? s/n")));
 	
@@ -50,6 +54,7 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 		return -1;
 	else
 		return codigo;
+	
 }
 
 

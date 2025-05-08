@@ -6,7 +6,7 @@ typedef struct  {
 	void *value;
 }Value;
 //----------------------------------------------------
-//Formato de una columna: nombre, tipo, es primary key? tamaño para varchar
+//Formato de una columna: nombre, tipo, es primary key? tamaï¿½o para varchar
 typedef struct{
   char nombre[MAX];
   tipo_dato tipo;
@@ -23,7 +23,7 @@ typedef struct {
     void *rows; //coleccion de filas
 }Table;
 //----------------------------------------------------
-// Estructura de pseudoobjeto genérico: Object 
+// Estructura de pseudoobjeto genï¿½rico: Object 
 typedef struct 
 {
  Table *ds;

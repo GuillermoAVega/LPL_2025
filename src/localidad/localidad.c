@@ -5,11 +5,17 @@
 THIS(obj_Localidad)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_LocalidadImpl(void *self)
+char *toString_LocalidadImpl(void *self)
 {
      obj_Localidad *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("%d - %s\n",obj->getCodpostal(obj),obj->getNombre(obj)); 
+     int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodpostal(obj), obj->getNombre(obj)); //calculo tamaño necesario
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s\n", obj->getCodpostal(obj),obj->getNombre(obj));
+     
+     return resultado;
+     
 }
 
 static int getCodpostalLocalidad_Impl(void *self)

@@ -4,14 +4,14 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o
-LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/sucursal/sucursal.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o
-LIBS     = -L"C:/Program Files/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -L"C:/Program Files (x86)/PostgreSQL/9.2/include" "C:/Program Files (x86)/PostgreSQL/9.2/lib/libpq.lib" -m32 -g3
-INCS     = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
-CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW64/include" -I"C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
+OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025\ copia/src/sucursal/sucursal.o"
+LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025 copia/src/sucursal/sucursal.o"
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -L"C:/Program Files (x86)/PostgreSQL/9.2/include" "C:/Program Files (x86)/PostgreSQL/9.2/lib/libpq.lib" -m32 -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
 BIN      = tpfinalTMPL.exe
-CXXFLAGS = $(CXXINCS) -m32 -g3
-CFLAGS   = $(INCS) -m32 -g3
+CXXFLAGS = $(CXXINCS) -m32 -g3 -g
+CFLAGS   = $(INCS) -m32 -g3 -g
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -75,9 +75,6 @@ src/medio_pago/medio_pago.o: src/medio_pago/medio_pago.c
 src/producto/producto.o: src/producto/producto.c
 	$(CC) -c src/producto/producto.c -o src/producto/producto.o $(CFLAGS)
 
-src/sucursal/sucursal.o: src/sucursal/sucursal.c
-	$(CC) -c src/sucursal/sucursal.c -o src/sucursal/sucursal.o $(CFLAGS)
-
 src/track_viaje/track_viaje.o: src/track_viaje/track_viaje.c
 	$(CC) -c src/track_viaje/track_viaje.c -o src/track_viaje/track_viaje.o $(CFLAGS)
 
@@ -116,3 +113,6 @@ view/Factura/Factura.o: view/Factura/Factura.c
 
 view/Detalle_Factura/Detalle_Factura.o: view/Detalle_Factura/Detalle_Factura.c
 	$(CC) -c view/Detalle_Factura/Detalle_Factura.c -o view/Detalle_Factura/Detalle_Factura.o $(CFLAGS)
+
+"../../LPL_2025\ copia/src/sucursal/sucursal.o": ../../LPL_2025\ copia/src/sucursal/sucursal.c
+	$(CC) -c "../../LPL_2025 copia/src/sucursal/sucursal.c" -o "../../LPL_2025 copia/src/sucursal/sucursal.o" $(CFLAGS)

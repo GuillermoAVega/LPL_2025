@@ -42,7 +42,6 @@ void cargarSucursal(){
 void modificarSucursal(){
 	
 		const char *menuModificarSucursal[] = {"Nombre", "Direccion", "Telefono", "Codigo postal"};
-		mostrarObjetos( (void *) Sucursal_new);
 		int codigo = ingresarCodigo((void *) Sucursal_new, "Ingrese el codigo de la sucursal que desea modificar:\n");
 		
 		obj_Sucursal *suc = Sucursal_new();
