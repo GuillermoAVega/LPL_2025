@@ -1,20 +1,17 @@
 #include "Factura.h"
 
-#define LIMPIAR 1
-#define MIN_VAL 0
-#define MAX_CODIGO 10000
-#define CORTE_INGRESO -1
+#include "string.h"
 
 void cargarFactura(){
-	
 	static int codigoFactura = 0;
 	
 	
 	int codCliente,codmpago;
 	
 	//foraneas
-	codCliente = ingresarCodigo ( (void *) Cliente_new ,  "Los clientes registrados son: ");
-	codmpago = ingresarCodigo ( (void *) MedioPago_new ,  "Los medio de pagos registrados son: ");	
+	codCliente = ingresarCodigo((void *) Cliente_new ,  "Los clientes registrados son: ");
+	system("cls");
+	codmpago = ingresarCodigo((void *) MedioPago_new ,  "Los medio de pagos registrados son: ");	
 	
 	//Solicito valores para registrar la factura.
 	int nro = leerEntero("Ingrese el numero de la factura \n",LIMPIAR, MIN_VAL, MAX_CODIGO, CORTE_INGRESO);
@@ -22,11 +19,20 @@ void cargarFactura(){
 	
 	char *letra;
 	do{
-		letra = leerCadena("Ingrese la letra de la factura: A/B/C \n",MAX1);
-	}while (!(letra[0] == 'A' || letra[0] == 'B' || letra[0] == 'C'));
+		letra = leerCadena("Ingrese la letra de la factura: A/B/C \n",MAX1);   //HACER CON TOUPPER PARA BORRAR EL SWITCH.
+		
+		switch(*letra)
+		{
+			case 'a': *letra = 'A'; break;
+			case 'b': *letra = 'B'; break;
+			case 'c': *letra = 'C'; break;
+		}
+		
+	}while (!(*letra == 'A' || *letra == 'B' || *letra == 'C'));
 	
 	
 	char *fecha = getFecha();
+	
 	
 	obj_Factura *factura = Factura_new();
 	
@@ -37,19 +43,72 @@ void cargarFactura(){
 	factura->setSerie(factura,serie);
 	factura->setLetra(factura,letra);
 	factura->setFecha(factura,fecha);
+
+	if(factura->saveObj(factura) == true)
+		printf("Ingreso de factura realizado con exito \n");	
+	system("PAUSE");
 	
-	system("pause");
-	if(factura->saveObj(factura) == true){
-		printf("Ingreso de factura realizado con exito \n");
-	}else 
-		printf("no");
-		
-	system("pause");
 	free(fecha);
 	free(letra);
 	destroyObj(factura);
 	
+
 }
 
 void modificarFactura(){
+	const char *menuModificarFactura[] = {"Nro", "Serie", "Letra", "Fecha", "Codigo del cliente", "Codigo del medio de pago"};
+	int opcion;
+	int codFactura = ingresarCodigo((void *) Factura_new, "Ingrese el codigo de la factura que desea modificar \n");	
+	if (codFactura == -1)
+		return;
+	opcion=mostrarMenu(menuModificarFactura, LEN(menuModificarFactura));
+	obj_Factura *factura = Factura_new();
+	if (factura->findbykey(factura, codFactura)){
+		switch (opcion){
+			case 1:{
+				int nro = leerEntero("Ingrese el nuevo numero de la factura \n",LIMPIAR, MIN_VAL, MAX_CODIGO, CORTE_INGRESO);
+				factura->setNro(factura,nro);
+				break;
+			}
+			case 2:{
+				int serie = leerEntero("Ingrese la nueva serie de la factura \n",LIMPIAR, MIN_VAL, MAX_CODIGO, CORTE_INGRESO);
+				factura->setSerie(factura,serie);
+				break;
+			}
+			case 3:{
+				char *letra;
+				do{
+					letra = leerCadena("Ingrese la letra de la factura: A/B/C \n",MAX1);
+				}while (!(letra[0] == 'A' || letra[0] == 'B' || letra[0] == 'C'));
+				factura->setLetra(factura,letra);
+				break;
+			}
+			case 4:{
+				char *fecha=getFecha();
+				factura->setFecha(factura,fecha);
+				free(fecha);
+				break;
+			}
+			case 5:{
+				int codCliente = ingresarCodigo(*(*Cliente_new),"Los clientes registrados son: ");
+				if (codCliente == -1)
+					return;
+				factura->setCodCliente(factura,codCliente);
+				break;
+			}
+			case 6:{
+				int codMpago = ingresarCodigo(*(*MedioPago_new),"Los clientes registrados son: ");
+				if (codMpago == -1)
+					return;
+				factura->setCodMpago(factura,codMpago);
+				break;
+			}
+		}
+		if(factura->saveObj(factura) == true)
+			printf("Modificacion al cliente realizada con exito \n");
+		system("PAUSE");
+		destroyObj(factura);
+	}
+		
 }
+

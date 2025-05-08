@@ -6,7 +6,7 @@
 THIS(obj_MedioPago)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_MedioPagoImpl(void *self)
+char *toString_MedioPagoImpl(void *self)
 {
 	//falta banco y m_pago
      obj_MedioPago *obj=this(self);      
@@ -47,7 +47,11 @@ static void setCodBancoMedioPago_Impl(void *self,int val)
 static void destroyInternalMED_Impl(void *self)
 {
 	obj_MedioPago *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+	if(obj->banco != NULL)
+		destroyObj(obj->banco);
+		
+	obj->banco = NULL;
 }
 //----------------------------------------------------
 //implementacion de relaciones

@@ -58,7 +58,11 @@ static void setCodPostalSucursal_Impl(void *self,int val)
 static void destroyInternalSUC_Impl(void *self)
 {
 	obj_Sucursal *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+
+	if(obj->localidad != NULL)
+		destroyObj(obj->localidad);
+	
+	obj->localidad = NULL;	
 }
 //----------------------------------------------------
 //implementacion de relaciones

@@ -7,18 +7,23 @@
 THIS(obj_SucursalDest)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_SucursalDestImpl(void *self)
+char *toString_SucursalDestImpl(void *self)
 {
-	/*
-     obj_SucursalDest *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->); 
+	
+     obj_SucursalDest *obj=this(self);
+	 obj_Sucursal *sucO = obj->getSucursalObjO(obj);
+	 obj_Sucursal *sucD = obj->getSucursalObjD(obj);
+	       
+     int size = snprintf(NULL, 0, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
+	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj)); 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s\n", obj->);
+     sprintf(resultado, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
+	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj));
      
      return resultado;
-     */
+     
 }
 
 static int getCodSucOSucursalDest_Impl(void *self)
@@ -46,7 +51,15 @@ static void setKmSucursalDest_Impl(void *self,int val)
 static void destroyInternalSUC_Impl(void *self)
 {
 	obj_SucursalDest *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	  
+	if(obj->sucursal_o != NULL)
+		destroyObj(obj->sucursal_o);
+
+	if(obj->sucursal_d != NULL)	   
+		destroyObj(obj->sucursal_d);
+	   
+	obj->sucursal_o   = NULL;
+    obj->sucursal_d   = NULL;
 }
 //----------------------------------------------------
 //implementacion de relaciones
@@ -89,7 +102,7 @@ static void *init_SucursalDest(void *self)
   obj->sucursal_d   = NULL;
 
   //incializacion de la interfaz de la entidad
-  obj->toString    		= toString_SucursalDestImpl;
+    obj->toString = toString_SucursalDestImpl;
   // Inicializar handlers de getters y setters
   /// getters
     

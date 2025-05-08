@@ -47,9 +47,6 @@ void gestionarActualizaciones(){
 			modificarDetalleFactura();
 			break;
 		
-		case 8:
-			modificarSucursalDest();
-			break;
 		
 	}
 }

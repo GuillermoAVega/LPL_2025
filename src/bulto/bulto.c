@@ -10,7 +10,7 @@
 THIS(obj_Bulto)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_BultoImpl(void *self)
+char *toString_BultoImpl(void *self)
 {
      obj_Bulto *obj=this(self);      
      int size = snprintf(NULL, 0, "%d - %d\n", obj->getCodigo(obj), obj->getEstado(obj)); 
@@ -75,7 +75,12 @@ static void setCodFacturaBulto_Impl(void *self,int val)
 static void destroyInternalBUL_Impl(void *self)
 {
 	obj_Bulto *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+	if(obj->factura != NULL)
+		destroyObj(obj->factura);
+	
+	obj->factura = NULL;
+	
 }
 //----------------------------------------------------
 //implementacion de relaciones
@@ -104,7 +109,7 @@ static void *init_Bulto(void *self)
     obj->factura   = NULL;
 
   //incializacion de la interfaz de la entidad
-  obj->toString    		= toString_BultoImpl;
+  obj->toString = toString_BultoImpl;
   // Inicializar handlers de getters y setters
   /// getters
     

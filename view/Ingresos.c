@@ -24,13 +24,12 @@ void mostrarObjetos( void *(*constructor)() ){
 	{
 		itm = ((Object **)list)[i];
 		char *str = ((Object *)itm)->toString(itm);
-		printf("%s",str);
+		printf("%s \n",str);
 		free(str);
 		
 	}
-	
-	system("PAUSE");
-	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
+
+	//destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
 	destroyObj(obj);
 	
 }
@@ -42,9 +41,9 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 	Object *obj = constructor();
 			
 	do{
-		printf("%s\n", msj_pant);
+		printf("%s \n", msj_pant);
 		mostrarObjetos( (void *) constructor); 
-		codigo = leerEntero("", 0, 0, 10000, -1);
+		codigo = leerEntero("Ingrese el codigo correspondiente: \n", 0, 0, 10000, -1);
 	
 	} while ((obj->findbykey(obj,codigo) == NOT_FOUND) && (reintentar = confirma("El codigo ingresado no se encuentra registrado. Desea reintentarlo? s/n")));
 	
@@ -92,7 +91,7 @@ void gestionarIngresos(){
 			break;
 		
 		case 8:
-			cargarSucursalDest();
+			cargarSucursalDet();
 			break;
 		
 	}

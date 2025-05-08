@@ -10,8 +10,8 @@
 THIS(obj_Compra)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_CompraImpl(void *self)
-{
+char *toString_CompraImpl(void *self)
+{ 
 	//faltan fechas
      obj_Compra *obj=this(self);      
      int size = snprintf(NULL, 0, "%d - cod factura:%d\n", obj->getCodigo(obj), obj->getCodFactura(obj)); //calculo tamaño necesario
@@ -60,7 +60,11 @@ static void setCodFacturaCompra_Impl(void *self,int val)
 static void destroyInternalCOM_Impl(void *self)
 {
 	obj_Compra *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+	if(obj->factura != NULL)
+		destroyObj(obj->factura);
+		
+	obj->factura = NULL;
 }
 //----------------------------------------------------
 //implementacion de relaciones

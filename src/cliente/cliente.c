@@ -6,7 +6,7 @@
 THIS(obj_Cliente)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_ClienteImpl(void *self)
+char *toString_ClienteImpl(void *self)
 {	//char cadena[200];
 	//faltan datos
 	
@@ -106,7 +106,6 @@ static void destroyInternalCLI_Impl(void *self)
 	if(obj->localidad!=NULL)
 	  destroyObj(obj->localidad);
 	obj->localidad = NULL;
-	// finalizar cada referencia inicializada - no NULL
 }
 //----------------------------------------------------
 //implementacion de relaciones

@@ -44,7 +44,7 @@ char *leerCadena(char *msj_pant,int max_cad){
 	else{
 		if(fgets(cadena, max_cad, stdin) != NULL){
 			int size = strlen(cadena);
-			cadena[size - 1] = '\0';
+			//cadena[size - 1] = '\0';
 			return cadena;
 		}
 	}

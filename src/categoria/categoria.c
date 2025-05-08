@@ -5,7 +5,7 @@
 THIS(obj_Categoria)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_CategoriaImpl(void *self)
+char *toString_CategoriaImpl(void *self)
 {
      obj_Categoria *obj=this(self);           
      int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj)); 

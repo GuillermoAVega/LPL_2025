@@ -104,7 +104,21 @@ static void setDetalleTrackViaje_Impl(void *self,char * val)
 static void destroyInternalTRA_Impl(void *self)
 {
 	obj_TrackViaje *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+
+	if(obj->sucursal_o != NULL)	
+		destroyObj(obj->sucursal_o);
+	
+	if(obj->sucursal_d != NULL)
+		destroyObj(obj->sucursal_d);
+	
+	if(obj->bulto != NULL)
+		destroyObj(obj->bulto);
+	
+  obj->sucursal_o = NULL;
+  obj->sucursal_d = NULL;
+  obj->bulto = NULL;
+	
 }
 //----------------------------------------------------
 //implementacion de relaciones

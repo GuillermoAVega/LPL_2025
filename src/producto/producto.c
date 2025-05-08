@@ -7,7 +7,7 @@
 THIS(obj_Producto)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_ProductoImpl(void *self)
+char *toString_ProductoImpl(void *self)
 {
 	
      obj_Producto *obj=this(self);
@@ -88,7 +88,15 @@ static void setDisponibleProducto_Impl(void *self,bool val)
 static void destroyInternalPRO_Impl(void *self)
 {
 	obj_Producto *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+	if(obj->categoria != NULL)
+		destroyObj(obj->categoria);
+		
+	if(obj->marca != NULL)
+		destroyObj(obj->marca);
+	
+	obj->categoria = NULL;
+	obj->marca = NULL;
 }
 //----------------------------------------------------
 //implementacion de relaciones

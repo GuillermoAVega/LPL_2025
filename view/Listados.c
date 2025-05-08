@@ -36,6 +36,7 @@ void listarClienteEnArchivo(FILE *archivo, int numeroCliente, Object *obj){
 	obj_Cliente *cliente = (obj_Cliente *) obj;
     obj_Localidad *localidad = cliente->getLocalidadObj(cliente); 
 
+
     fprintf(archivo, "---------------------------------\n");
     fprintf(archivo, "Cliente %d \n", numeroCliente);
     fprintf(archivo, "Usuario: %s \n", cliente->getUsuario(cliente));
@@ -133,13 +134,17 @@ void listarClientes() {
 	
 }
 
-//Los productos con posibilidad de orden por /categoria 
+//Los productos con posibilidad de orden por marca/categoria 
 void listarProductos(){
-	int respuesta = leerEntero("�Quiere ver todos los productos(1) o ver por categorias(2)?\n", 1, 1, 2, -1);
+	
+	const char *menuListarProductos[] = {"Ordenados por marca", "Ordenados por categoria"};
+	int opcion = mostrarMenu(menuListarProductos, LEN(menuListarProductos));
+	
 	if (respuesta == 1){
 		printf("Los productos cargados son: \n");
 		mostrarObjetos( (void *) Producto_new);
-	}else{
+	}
+	else{
 		char criterio[100]; // Buffer para el criterio
 		int categoria_usuario = ingresarCodigo((void *) Categoria_new ,  "Ingrese el codigo de la categoria que desea listar:\n");
 		sprintf(criterio, "cod_categoria = %d", categoria_usuario);

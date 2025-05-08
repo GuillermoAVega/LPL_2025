@@ -12,13 +12,13 @@ THIS(obj_Factura)// crea definicion de funcion this para este modulo. .. Macro e
 char* toString_FacturaImpl(void *self)
 {
      obj_Factura *obj=this(self); 
-	 int size = snprintf(NULL, 0, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%c - Cod cliente:%d - Cod m_pago:%d\n",
+	 int size = snprintf(NULL, 0, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%s - Cod cliente:%d - Cod m_pago:%d\n",
 	 							obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),
 								obj->getLetra(obj),obj->getCodCliente(obj),obj->getCodMpago(obj)); 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%c - Cod cliente:%d - Cod m_pago:%d\n",
+     sprintf(resultado, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%s - Cod cliente:%d - Cod m_pago:%d\n",
 	 							obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),
 								obj->getLetra(obj),obj->getCodCliente(obj),obj->getCodMpago(obj));
      
@@ -86,7 +86,17 @@ static void setCodMpagoFactura_Impl(void *self,int val)
 static void destroyInternalFAC_Impl(void *self)
 {
 	obj_Factura *obj = this(self);	
-	// finalizar cada referencia inicializada - no NULL
+	
+	if(obj->cliente != NULL)
+	    destroyObj(obj->cliente);
+	    
+	if(obj->medio_pago != NULL)
+	    destroyObj(obj->medio_pago);
+	        
+
+	obj->cliente = NULL;	
+    obj->medio_pago = NULL;
+
 }
 //----------------------------------------------------
 //implementacion de relaciones
