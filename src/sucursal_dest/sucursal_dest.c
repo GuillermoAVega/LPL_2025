@@ -9,16 +9,22 @@ THIS(obj_SucursalDest)// crea definicion de funcion this para este modulo. .. Ma
 //----------------------------------------------------
 char* toString_SucursalDestImpl(void *self)
 {
-	/*
-     obj_SucursalDest *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->); 
+	
+     obj_SucursalDest *obj=this(self);
+	 obj_Sucursal *sucO = obj->getSucursalObjO(obj);
+	 obj_Sucursal *sucD = obj->getSucursalObjD(obj);
+	       
+     int size = snprintf(NULL, 0, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
+	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj)); 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s\n", obj->);
+     sprintf(resultado, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
+	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj));
      
      return resultado;
-     */
+     
+     
 }
 
 static int getCodSucOSucursalDest_Impl(void *self)
@@ -54,13 +60,24 @@ static void destroyInternalSUC_Impl(void *self)
 obj_Sucursal *getSucursalDest_SucursalObjO_Impl(void *self)
 {
  obj_SucursalDest *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_o = Sucursal_new();
+ 
+ if(obj->sucursal_o->findbykey(obj->sucursal_o,obj->getCodSucO(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_o;
+
 }
+
 obj_Sucursal *getSucursalDest_SucursalObjD_Impl(void *self)
 {
  obj_SucursalDest *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_d = Sucursal_new();
+ 
+ if(obj->sucursal_d->findbykey(obj->sucursal_d,obj->getCodSucD(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_d;
 }
+
 //----------------------------------------------------
 int getKmSucursalDest_Impl(void *self)
  { return  *((int *) getValue(self,POS_KM_SUC));}

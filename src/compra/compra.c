@@ -14,7 +14,7 @@ char* toString_CompraImpl(void *self)
 {
 	//faltan fechas
      obj_Compra *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - cod factura:%d\n", obj->getCodigo(obj), obj->getCodFactura(obj)); //calculo tamaño necesario
+     int size = snprintf(NULL, 0, "%d - cod factura:%d\n", obj->getCodigo(obj), obj->getCodFactura(obj)); //calculo tama?o necesario
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
@@ -67,7 +67,12 @@ static void destroyInternalCOM_Impl(void *self)
 //----------------------------------------------------
 obj_Factura *getCompra_FacturaObj_Impl(void *self)
 {
- obj_Compra *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_Compra *obj = this(self);        //acceso a la informacion relacionada  
+ obj->factura = Factura_new();
+ 
+ if(obj->factura->findbykey(obj->factura, obj->getCodFactura(obj))==NOT_FOUND)
+   return NULL;
+ return obj->factura;
 }
 //----------------------------------------------------
 //implementacion constructor

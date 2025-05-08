@@ -9,20 +9,23 @@
 THIS(obj_Factura)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_FacturaImpl(void *self)
+char *toString_FacturaImpl(void *self)
 {
-     obj_Factura *obj=this(self); 
-	 int size = snprintf(NULL, 0, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%c - Cod cliente:%d - Cod m_pago:%d\n",
-	 							obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),
-								obj->getLetra(obj),obj->getCodCliente(obj),obj->getCodMpago(obj)); 
-     
-	 char *resultado = malloc(size +1);
+     obj_Factura *obj=this(self);
+	 obj_Cliente *cliente = obj->getClienteObj(obj);
+	 obj_MedioPago *medio = obj->getMedioPagoObj(obj);
+     int size = snprintf(NULL, 0, "Cod:%d - Nro:%d - Serie:%d - Letra:%s - Cliente:%s - Medio de pago:%s\n", obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),obj->getLetra(obj),
+                                                                  cliente->getUsuario(cliente),medio->getDescripcion(medio));
+
+     char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%c - Cod cliente:%d - Cod m_pago:%d\n",
-	 							obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),
-								obj->getLetra(obj),obj->getCodCliente(obj),obj->getCodMpago(obj));
-     
-     return resultado;     
+
+     sprintf(resultado, "Cod:%d - Nro:%d - Serie:%d - Letra:%s - Cliente:%s - Medio de pago:%s\n", obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),obj->getLetra(obj),
+                                                                  cliente->getUsuario(cliente),medio->getDescripcion(medio));
+	
+	destroyObj(medio);
+	destroyObj(cliente);
+    return resultado;
 }
 
 static int getCodigoFactura_Impl(void *self)
@@ -93,10 +96,23 @@ static void destroyInternalFAC_Impl(void *self)
 //----------------------------------------------------
 obj_Cliente *getFactura_ClienteObj_Impl(void *self)
 {
- obj_Factura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-}obj_MedioPago *getFactura_MedioPagoObj_Impl(void *self)
+ obj_Factura *obj = this(self);        //acceso a la informacion relacionada   
+ obj->cliente = Cliente_new();
+ 
+ if(obj->cliente->findbykey(obj->cliente,obj->getCodCliente(obj))==NOT_FOUND)
+   return NULL;
+ return obj->cliente;
+}
+
+
+obj_MedioPago *getFactura_MedioPagoObj_Impl(void *self)
 {
- obj_Factura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_Factura *obj = this(self);        //acceso a la informacion relacionada  
+ obj->medio_pago = MedioPago_new();
+ 
+ if(obj->medio_pago->findbykey(obj->medio_pago,obj->getCodMpago(obj))==NOT_FOUND)
+   return NULL;
+ return obj->medio_pago; 
 }
 //----------------------------------------------------
 //implementacion constructor

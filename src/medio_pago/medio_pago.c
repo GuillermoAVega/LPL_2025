@@ -8,13 +8,15 @@ THIS(obj_MedioPago)// crea definicion de funcion this para este modulo. .. Macro
 //----------------------------------------------------
 char* toString_MedioPagoImpl(void *self)
 {
-	//falta banco y m_pago
-     obj_MedioPago *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
+
+     obj_MedioPago *obj=this(self);  
+	 obj_Banco *banco = obj->getBancoObj(obj);
+     int size = snprintf(NULL, 0,"%d - %s - Banco:%s\n", obj->getCodigo(obj), obj->getDescripcion(obj), banco->getNombre(banco)); 
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj));
+     sprintf(resultado,"%d - %s - Banco:%s\n", obj->getCodigo(obj), obj->getDescripcion(obj), banco->getNombre(banco));
      
+     destroyObj(banco);
      return resultado;
 }
 
@@ -54,7 +56,13 @@ static void destroyInternalMED_Impl(void *self)
 //----------------------------------------------------
 obj_Banco *getMedioPago_BancoObj_Impl(void *self)
 {
- obj_MedioPago *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_MedioPago *obj = this(self);        //acceso a la informacion relacionada   return NULL; 
+ obj->banco = Banco_new();
+ 
+ if(obj->banco->findbykey(obj->banco,obj->getCodBanco(obj))==NOT_FOUND)
+   return NULL;
+ return obj->banco;
+ 
 }
 //----------------------------------------------------
 //implementacion constructor

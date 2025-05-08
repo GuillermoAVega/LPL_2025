@@ -5,15 +5,11 @@
 THIS(obj_Banco)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_BancoImpl(void *self)
+static void toString_BancoImpl(void *self)
 {
      obj_Banco *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s - %s\n", obj->getCodigo(obj), obj->getNombre(obj),obj->getDireccion(obj));
-	 char *resultado = malloc(size +1);
-     if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s - %s\n", obj->getCodigo(obj), obj->getNombre(obj),obj->getDireccion(obj));
-     
-     return resultado;
+     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
+     printf("\n"); 
 }
 
 static int getCodigoBanco_Impl(void *self)

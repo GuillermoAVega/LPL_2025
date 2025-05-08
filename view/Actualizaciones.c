@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 
-const char *menuActualizaciones[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino"}; //MODIFICAR SUCURSAL DESTINO.
+const char *menuActualizaciones[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura"};
 
 
 void gestionarActualizaciones(){
@@ -46,10 +46,5 @@ void gestionarActualizaciones(){
 		case 7:
 			modificarDetalleFactura();
 			break;
-		
-		case 8:
-			modificarSucursalDest();
-			break;
-		
 	}
 }

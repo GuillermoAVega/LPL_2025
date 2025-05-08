@@ -13,11 +13,20 @@
 THIS(obj_DetFactura)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_DetFacturaImpl(void *self)
+char  *toString_DetFacturaImpl(void *self)
 {
-     obj_DetFactura *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("\n"); 
+     obj_DetFactura *obj=this(self);  
+	 obj_Producto *prod = Producto_new();    
+     int size = snprintf(NULL, 0, "Codigo factura: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
+	 					 obj->getCodFactura(obj), obj->getCodProducto(obj), prod->getDescripcion(prod),prod->getPrecio(prod),obj->getCantidad(obj));
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "Codigo factura: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
+	 					 obj->getCodFactura(obj), obj->getCodProducto(obj), prod->getDescripcion(prod),prod->getPrecio(prod),obj->getCantidad(obj));
+    
+    destroyObj(prod);
+	 return resultado;
 }
 
 static int getCodFacturaDetFactura_Impl(void *self)
@@ -72,10 +81,22 @@ static void destroyInternalDET_Impl(void *self)
 //----------------------------------------------------
 obj_Factura *getDetFactura_FacturaObj_Impl(void *self)
 {
- obj_DetFactura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-}obj_Producto *getDetFactura_ProductoObj_Impl(void *self)
+ obj_DetFactura *obj = this(self);        //acceso a la informacion relacionada  
+ obj->factura = Factura_new();
+ 
+ if(obj->factura->findbykey(obj->factura,obj->getCodFactura(obj))==NOT_FOUND)
+   return NULL;
+ return obj->factura;
+}
+
+obj_Producto *getDetFactura_ProductoObj_Impl(void *self)
 {
- obj_DetFactura *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj_DetFactura *obj = this(self);        //acceso a la informacion relacionada  
+ obj->producto = Producto_new();
+ 
+ if(obj->producto->findbykey(obj->producto,obj->getCodProducto(obj))==NOT_FOUND)
+   return NULL;
+ return obj->producto;
 }
 //----------------------------------------------------
 //implementacion constructor

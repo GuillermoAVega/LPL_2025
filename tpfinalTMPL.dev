@@ -171,16 +171,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit19]
-FileName=src\bulto\bulto.h
-CompileCpp=0
-Folder=src/bulto
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit20]
 FileName=src\categoria\categoria.c
 CompileCpp=0
 Folder=src/categoria
@@ -190,7 +180,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit21]
+[Unit20]
 FileName=src\categoria\categoria.h
 CompileCpp=0
 Folder=src/categoria
@@ -200,8 +190,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit23]
-FileName=src\cliente\cliente.h
+[Unit21]
+FileName=src\cliente\cliente.c
 CompileCpp=0
 Folder=src/cliente
 Compile=1
@@ -210,8 +200,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit25]
-FileName=src\compra\compra.h
+[Unit23]
+FileName=src\compra\compra.c
 CompileCpp=0
 Folder=src/compra
 Compile=1
@@ -220,7 +210,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit26]
+[Unit25]
 FileName=src\det_factura\det_factura.c
 CompileCpp=0
 Folder=src/det_factura
@@ -230,7 +220,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit27]
+[Unit26]
 FileName=src\det_factura\det_factura.h
 CompileCpp=0
 Folder=src/det_factura
@@ -240,7 +230,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit28]
+[Unit27]
 FileName=src\factura\factura.c
 CompileCpp=0
 Folder=src/factura
@@ -250,7 +240,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit29]
+[Unit28]
 FileName=src\factura\factura.h
 CompileCpp=0
 Folder=src/factura
@@ -260,7 +250,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit29]
 FileName=src\marca\marca.c
 CompileCpp=0
 Folder=src/marca
@@ -270,7 +260,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
+[Unit30]
 FileName=src\marca\marca.h
 CompileCpp=0
 Folder=src/marca
@@ -280,7 +270,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit32]
+[Unit31]
 FileName=src\medio_pago\medio_pago.c
 CompileCpp=0
 Folder=src/medio_pago
@@ -290,7 +280,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit33]
+[Unit32]
 FileName=src\medio_pago\medio_pago.h
 CompileCpp=0
 Folder=src/medio_pago
@@ -300,7 +290,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit34]
+[Unit33]
 FileName=src\producto\producto.c
 CompileCpp=0
 Folder=src/producto
@@ -310,10 +300,20 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit35]
+[Unit34]
 FileName=src\producto\producto.h
 CompileCpp=0
 Folder=src/producto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit35]
+FileName=src\sucursal\sucursal.h
+CompileCpp=0
+Folder=src/sucursal
 Compile=1
 Link=1
 Priority=1000
@@ -351,6 +351,16 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit18]
+FileName=src\bulto\bulto.h
+CompileCpp=0
+Folder=src/bulto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit17]
 FileName=src\bulto\bulto.c
 CompileCpp=0
 Folder=src/bulto
@@ -360,28 +370,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit16]
-FileName=src\banco\banco.c
-CompileCpp=0
-Folder=src/banco
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit17]
-FileName=src\banco\banco.h
-CompileCpp=0
-Folder=src/banco
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit22]
-FileName=src\cliente\cliente.c
+FileName=src\cliente\cliente.h
 CompileCpp=0
 Folder=src/cliente
 Compile=1
@@ -391,7 +381,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit24]
-FileName=src\compra\compra.c
+FileName=src\compra\compra.h
 CompileCpp=0
 Folder=src/compra
 Compile=1
@@ -401,16 +391,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit37]
-FileName=src\track_viaje\track_viaje.c
-CompileCpp=0
-Folder=src/track_viaje
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit38]
 FileName=src\track_viaje\track_viaje.h
 CompileCpp=0
 Folder=src/track_viaje
@@ -420,7 +400,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit39]
+[Unit38]
 FileName=src\sucursal_dest\sucursal_dest.c
 CompileCpp=0
 Folder=src/sucursal_dest
@@ -430,7 +410,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit40]
+[Unit39]
 FileName=src\sucursal_dest\sucursal_dest.h
 CompileCpp=0
 Folder=src/sucursal_dest
@@ -440,7 +420,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit41]
+[Unit40]
 FileName=view\Ingresos.c
 CompileCpp=0
 Folder=view
@@ -450,7 +430,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit42]
+[Unit41]
 FileName=view\Actualizaciones.c
 CompileCpp=0
 Folder=view
@@ -460,7 +440,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit43]
+[Unit42]
 FileName=view\Listados.c
 CompileCpp=0
 Folder=view
@@ -470,7 +450,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit44]
+[Unit43]
 FileName=view\Cliente\Cliente.c
 CompileCpp=0
 Folder=view/Cliente
@@ -480,7 +460,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit45]
+[Unit44]
 FileName=view\Cliente\Cliente.h
 CompileCpp=0
 Folder=view/Cliente
@@ -490,7 +470,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit46]
+[Unit45]
 FileName=view\Sucursal_det\Sucursal_det.c
 CompileCpp=0
 Folder=view/Sucursal_Det
@@ -500,7 +480,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit47]
+[Unit46]
 FileName=view\Sucursal_det\Sucursal_det.h
 CompileCpp=0
 Folder=view/Sucursal_Det
@@ -510,7 +490,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit48]
+[Unit47]
 FileName=view\Sucursal\Sucursal.c
 CompileCpp=0
 Folder=view/Sucursal
@@ -520,7 +500,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit49]
+[Unit48]
 FileName=view\Sucursal\Sucursal.h
 CompileCpp=0
 Folder=view/Sucursal
@@ -530,7 +510,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit50]
+[Unit49]
 FileName=view\Producto\Producto.c
 CompileCpp=0
 Folder=view/Producto
@@ -540,8 +520,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit52]
-FileName=view\Marca\Marca.h
+[Unit50]
+FileName=view\Marca\Marca.c
 CompileCpp=0
 Folder=view/Marca
 Compile=1
@@ -550,7 +530,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit53]
+[Unit52]
 FileName=view\Localidad\Localidad.c
 CompileCpp=0
 Folder=view/Localidad
@@ -560,7 +540,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit54]
+[Unit53]
 FileName=view\Localidad\Localidad.h
 CompileCpp=0
 Folder=view/Localidad
@@ -570,7 +550,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit55]
+[Unit54]
 FileName=view\Factura\Factura.c
 CompileCpp=0
 Folder=view/Factura
@@ -580,7 +560,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit56]
+[Unit55]
 FileName=view\Factura\Factura.h
 CompileCpp=0
 Folder=view/Factura
@@ -590,7 +570,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit57]
+[Unit56]
 FileName=view\Detalle_Factura\Detalle_Factura.c
 CompileCpp=0
 Folder=view/Detalle_Factura
@@ -600,7 +580,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit58]
+[Unit57]
 FileName=view\Detalle_Factura\Detalle_Factura.h
 CompileCpp=0
 Folder=view/Detalle_Factura
@@ -610,7 +590,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit59]
+[Unit58]
 FileName=..\..\LPL_2025 copia\src\sucursal\sucursal.c
 CompileCpp=0
 Folder=src/sucursal
@@ -620,7 +600,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit60]
+[Unit59]
 FileName=..\..\LPL_2025 copia\src\producto\producto.h
 CompileCpp=0
 Folder=view/Producto
@@ -630,10 +610,20 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit36]
-FileName=src\sucursal\sucursal.h
+[Unit60]
+FileName=..\..\..\Downloads\TpFinal-C-2025\TpFinal-C-2025\src\banco\banco.c
 CompileCpp=0
-Folder=src/sucursal
+Folder=src/banco
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit36]
+FileName=src\track_viaje\track_viaje.c
+CompileCpp=0
+Folder=src/track_viaje
 Compile=1
 Link=1
 Priority=1000
@@ -641,9 +631,19 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit51]
-FileName=view\Marca\Marca.c
+FileName=view\Marca\Marca.h
 CompileCpp=0
 Folder=view/Marca
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit16]
+FileName=src\banco\banco.h
+CompileCpp=0
+Folder=src/banco
 Compile=1
 Link=1
 Priority=1000

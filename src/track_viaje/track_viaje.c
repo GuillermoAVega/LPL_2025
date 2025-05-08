@@ -112,18 +112,33 @@ static void destroyInternalTRA_Impl(void *self)
 obj_Sucursal *getTrackViaje_SucursalObjO_Impl(void *self)
 {
  obj_TrackViaje *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_o = Sucursal_new();
+ 
+ if(obj->sucursal_o->findbykey(obj->sucursal_o,obj->getCodSucO(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_o;
 }
+
 obj_Sucursal *getTrackViaje_SucursalObjD_Impl(void *self)
 {
  obj_TrackViaje *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->sucursal_d = Sucursal_new();
+ 
+ if(obj->sucursal_d->findbykey(obj->sucursal_d,obj->getCodSucD(obj))==NOT_FOUND)
+   return NULL;
+ return obj->sucursal_d;
 }
+
 obj_Bulto *getTrackViaje_BultoObj_Impl(void *self)
 {
  obj_TrackViaje *obj = this(self);        //acceso a la informacion relacionada   
- return NULL;
+ obj->bulto = Bulto_new();
+ 
+ if(obj->bulto->findbykey(obj->bulto,obj->getCodBulto(obj))==NOT_FOUND)
+   return NULL;
+ return obj->bulto;
 }
+
 //----------------------------------------------------
 //implementacion constructor
 //----------------------------------------------------

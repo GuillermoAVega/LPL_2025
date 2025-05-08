@@ -66,6 +66,12 @@ static void destroyInternalSUC_Impl(void *self)
 obj_Localidad *getSucursal_LocalidadObj_Impl(void *self)
 {
  obj_Sucursal *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj->localidad = Localidad_new();
+ 
+ if(obj->localidad->findbykey(obj->localidad,obj->getCodPostal(obj))==NOT_FOUND)
+   return NULL;
+ return obj->localidad;
+
 }
 //----------------------------------------------------
 //implementacion constructor

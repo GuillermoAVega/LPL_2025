@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025\ copia/src/sucursal/sucursal.o"
-LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/banco/banco.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025 copia/src/sucursal/sucursal.o"
+OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025\ copia/src/sucursal/sucursal.o" ../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.o
+LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/localidad/localidad.o config/config.o lib/orm/query.o view/view.o src/bulto/bulto.o src/categoria/categoria.o src/cliente/cliente.o src/compra/compra.o src/det_factura/det_factura.o src/factura/factura.o src/marca/marca.o src/medio_pago/medio_pago.o src/producto/producto.o src/track_viaje/track_viaje.o src/sucursal_dest/sucursal_dest.o view/Ingresos.o view/Actualizaciones.o view/Listados.o view/Cliente/Cliente.o view/Sucursal_det/Sucursal_det.o view/Sucursal/Sucursal.o view/Producto/Producto.o view/Marca/Marca.o view/Localidad/Localidad.o view/Factura/Factura.o view/Detalle_Factura/Detalle_Factura.o "../../LPL_2025 copia/src/sucursal/sucursal.o" ../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -L"C:/Program Files (x86)/PostgreSQL/9.2/include" "C:/Program Files (x86)/PostgreSQL/9.2/lib/libpq.lib" -m32 -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
@@ -44,9 +44,6 @@ lib/orm/query.o: lib/orm/query.c
 
 view/view.o: view/view.c
 	$(CC) -c view/view.c -o view/view.o $(CFLAGS)
-
-src/banco/banco.o: src/banco/banco.c
-	$(CC) -c src/banco/banco.c -o src/banco/banco.o $(CFLAGS)
 
 src/bulto/bulto.o: src/bulto/bulto.c
 	$(CC) -c src/bulto/bulto.c -o src/bulto/bulto.o $(CFLAGS)
@@ -116,3 +113,6 @@ view/Detalle_Factura/Detalle_Factura.o: view/Detalle_Factura/Detalle_Factura.c
 
 "../../LPL_2025\ copia/src/sucursal/sucursal.o": ../../LPL_2025\ copia/src/sucursal/sucursal.c
 	$(CC) -c "../../LPL_2025 copia/src/sucursal/sucursal.c" -o "../../LPL_2025 copia/src/sucursal/sucursal.o" $(CFLAGS)
+
+../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.o: ../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.c
+	$(CC) -c ../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.c -o ../../../Downloads/TpFinal-C-2025/TpFinal-C-2025/src/banco/banco.o $(CFLAGS)

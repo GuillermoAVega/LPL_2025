@@ -38,7 +38,6 @@ void cargarSucursal(){
 }
 
 
-
 void modificarSucursal(){
 	
 		const char *menuModificarSucursal[] = {"Nombre", "Direccion", "Telefono", "Codigo postal"};

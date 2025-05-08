@@ -7,25 +7,29 @@
 THIS(obj_Producto)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char* toString_ProductoImpl(void *self)
+
+char *toString_ProductoImpl(void *self)
 {
-	
-     obj_Producto *obj=this(self);
-     obj_Marca *mar = obj->getMarcaObj(obj);
-     char *cadena = mar->getDescripcion(mar);
-     printf("%s",cadena);
-     int size = snprintf(NULL, 0, "%d - %s - stock: %.2f - marca:%s \n", obj->getCodigo(obj), obj->getDescripcion(obj),
-	 	 														obj->getStock(obj), mar->getDescripcion(mar));	
+
+     obj_Producto *obj = this(self);
+     obj_Marca *marca = obj->getMarcaObj(obj);
+     obj_Categoria *cat = obj->getCategoriaObj(obj);
      
-	 char *resultado = malloc(size +1);
+     int size = snprintf(NULL, 0, "%d - %s - stock: %.2f - marca: %s - categoria: %s\n", obj->getCodigo(obj), obj->getDescripcion(obj),
+                                                                  obj->getStock(obj), marca->getDescripcion(marca),cat->getDescripcion(cat));
+
+     char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     
-	 sprintf(resultado, "%d - %s - stock: %.2f - marca:%s \n", obj->getCodigo(obj), obj->getDescripcion(obj),
-	 	 														obj->getStock(obj), mar->getDescripcion(mar));
-     
-     return resultado;
-     
+
+     sprintf(resultado, "%d - %s - stock: %.2f - marca: %s - categoria: %s\n", obj->getCodigo(obj), obj->getDescripcion(obj),
+                                                                  obj->getStock(obj), marca->getDescripcion(marca),cat->getDescripcion(cat));
+	destroyObj(cat);
+	destroyObj(marca);
+    return resultado;
 }
+
+
+
 
 static int getCodigoProducto_Impl(void *self)
 { return  *((int *) getValue(self,POS_CODIGO_PRO));}
@@ -96,14 +100,23 @@ static void destroyInternalPRO_Impl(void *self)
 obj_Categoria *getProducto_CategoriaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
+ obj->categoria = Categoria_new();
+
+ if(obj->categoria->findbykey(obj->categoria,obj->getCodCategoria(obj))==NOT_FOUND)
+   return NULL;
+ return obj->categoria;
+ 
 }
-obj_Marca getProducto_MarcaObj_Impl(void *self)
+
+obj_Marca *getProducto_MarcaObj_Impl(void *self)
 {
  obj_Producto *obj = this(self);        //acceso a la informacion relacionada   return NULL;
-
+ obj->marca = Marca_new();
+ 
+  if(obj->marca->findbykey(obj->marca,obj->getCodMarca(obj))==NOT_FOUND)
+   return NULL;
+ return obj->marca;
 }
-
-
 //----------------------------------------------------
 //implementacion constructor
 //----------------------------------------------------

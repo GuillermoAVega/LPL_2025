@@ -37,7 +37,7 @@ void mostrarObjetos( void *(*constructor)() ){
 
 int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 	
-	int codigo, reintentar;
+	int codigo, reintentar = 1;
 	Object *obj = constructor();
 			
 	do{
@@ -56,7 +56,6 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 		return codigo;
 	
 }
-
 
 void gestionarIngresos(){
 	

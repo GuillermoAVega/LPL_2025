@@ -20,6 +20,7 @@ void listadoProductos(){
 	}else{
 		char criterio[100]; // Buffer para el criterio
 		int categoria_usuario = ingresarCodigo((void *) Categoria_new ,  "Ingrese el codigo de la categoria que desea listar:\n");
+		
 		sprintf(criterio, "cod_categoria = %d", categoria_usuario);
 		void *list,*itm; 
 		int i,size=0; 
@@ -27,16 +28,17 @@ void listadoProductos(){
 		obj_Producto *prod = Producto_new();
 		size = prod->findAll(prod,&list,criterio); // se invoca sin criterio - listar todos... 
 		
-		for(i=0;i<size;++i){ 
-			itm = ((Object **)list)[i]; 
-			((Object *)itm)->toString(itm); 
-		} 
+		for (i = 0; i < size; ++i) {
+		    itm = ((Object **)list)[i];
+		    char *str = ((Object *)itm)->toString(itm);
+		    printf("%s", str);
+		    free(str); 
+		}
+		
 		destroyObjList(list,size);  // liberar listado, cada instancia creada en el listado 
 		destroyObj(prod); // liberar Recurso 
 		
-		getch();
-		
-
+		system("PAUSE");
 	}
 	
 }
@@ -45,9 +47,15 @@ void gestionarListados(){
 	int opcion = mostrarMenu(menuListados, LEN(menuListados));
 	
 	switch (opcion){
+		case(1):
+			break;
 		case(2):
 			 listadoProductos();	
 			 break;
+		case(3):
+			break;
+		case(4):
+			break;
 	}
 	
 	return 0;
