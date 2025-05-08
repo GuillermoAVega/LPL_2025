@@ -20,12 +20,20 @@ char *toString_ClienteImpl(void *self)
 }
 */
 
-static void toString_ClienteImpl(void *self)
-{
-     obj_Cliente *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     obj_Localidad *loc = obj->getLocalidadObj(obj);
-	 printf("Cuil: %s - %s \n",obj->getCuil(obj),obj->getUsuario(obj)); 
+char* toString_ClienteImpl(void *self){	
+
+     obj_Cliente *obj=this(self);   
+	 obj_Localidad *loc = obj->getLocalidadObj(obj);
+	 
+     int size = snprintf(NULL, 0, "%d - %s - %s - %s" , obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj), loc->getNombre(loc)); 
+     
+	 char *resultado = malloc(size +1);
+     if (resultado == NULL) return NULL;
+     sprintf(resultado, "%d - %s - %s - %s", obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj),loc->getNombre(loc));
+	
+	 destroyObj(loc);
+     return resultado;
+	
 }
 
 
