@@ -15,16 +15,22 @@ THIS(obj_TrackViaje)// crea definicion de funcion this para este modulo. .. Macr
 char* toString_TrackViajeImpl(void *self)
 {
      obj_TrackViaje *obj=this(self);      
-     /*
-     obj_SucursalDest *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->); 
+    
+     obj_Sucursal *sucO = obj->getSucursalObjO(obj);
+     obj_Sucursal *sucD = obj->getSucursalObjD(obj);
+     int size = snprintf(NULL, 0, "cod track:%d - cod bulto: %d Sucursal origen: %d - %s - Sucursal Destino: %d - %s Fecha ingreso: %s - Fecha salida: %s\n",
+	 							 obj->getCodigo(obj),obj->getCodBulto(obj),sucO->getCodigo(sucO),sucO->getNombre(sucO), sucD->getCodigo(sucD),sucD->getNombre(sucD),
+								  obj->getFIngreso(obj), obj->getFSalida(obj)); 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s\n", obj->);
+     sprintf(resultado, "cod track:%d - cod bulto: %d Sucursal origen: %d - %s - Sucursal Destino: %d - %s Fecha ingreso: %s - Fecha salida: %s\n",
+	 							 obj->getCodigo(obj),obj->getCodBulto(obj),sucO->getCodigo(sucO),sucO->getNombre(sucO), sucD->getCodigo(sucD),sucD->getNombre(sucD),
+								  obj->getFIngreso(obj), obj->getFSalida(obj)); 
      
-     return resultado;
-     */
+     destroyObj(sucO);
+     destroyObj(sucD);
+     return resultado;  
 }
 
 static int getCodigoTrackViaje_Impl(void *self)
