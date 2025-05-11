@@ -22,7 +22,6 @@ char *toString_ProductoImpl(void *self)
      
 	 sprintf(resultado, "%d - %s - stock: %.2f - marca:%s \n", obj->getCodigo(obj), obj->getDescripcion(obj),
 	 	 														obj->getStock(obj), mar->getDescripcion(mar));
-     
      return resultado;
      
 }

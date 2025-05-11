@@ -53,6 +53,34 @@ char *leerCadena(char *msj_pant,int max_cad){
 }
 
 
+void registrarEvento(char *objeto, char *descripcion){
+	static int codigo = 1;
+	
+	obj_Auditoria *auditoria = Auditoria_new(); 
+	
+	auditoria->setCodigo(auditoria, codigo++);
+	auditoria->setDetalle(auditoria, descripcion);
+	
+	
+	char *fecha = getFechaHora();
+	auditoria->setFecha(auditoria, fecha);
+	auditoria->setObjeto(auditoria, objeto);
+	
+	setDebug(1);
+	
+	if(auditoria->saveObj(auditoria) != true){
+		printf("No se registro el evento \n");
+	}
+	else{
+		printf("insercion exitosa");
+	}
+	
+	destroyObj(auditoria);
+	//free(fecha);
+}
+
+
+
 float leerFloat(char *msj_pant ){
 	
 	float n;

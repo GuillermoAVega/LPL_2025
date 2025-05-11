@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 
   int opcion = 0; 
   
+  
   do{
   	
 	opcion = mostrarMenu(menuPrincipal, LEN(menuPrincipal));
@@ -41,8 +42,12 @@ int main(int argc, char *argv[])
 	  		
 	  	}	
 	  	
+	  		  	
   } while(opcion != -1);
   
+  
+
+    
   
   // ejemplo para agregar Localidad nueva.
   

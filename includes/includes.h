@@ -20,6 +20,7 @@
 #include "../src/compra/compra.h"
 #include "../src/bulto/bulto.h"
 #include "../src/track_viaje/track_viaje.h"
+#include "../src/log_audit/log_audit.h"
 
 #include "../view/view.h"
 

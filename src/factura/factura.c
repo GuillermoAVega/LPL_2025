@@ -18,7 +18,7 @@ char* toString_FacturaImpl(void *self)
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
-     sprintf(resultado, "Cod factura:%d - Nro:%d - Serie:%d - Letra:%s - Cod cliente:%d - Cod m_pago:%d\n",
+     sprintf(resultado, size ,"Cod factura:%d - Nro:%d - Serie:%d - Letra:%s - Cod cliente:%d - Cod m_pago:%d\n",
 	 							obj->getCodigo(obj), obj->getNro(obj), obj->getSerie(obj),
 								obj->getLetra(obj),obj->getCodCliente(obj),obj->getCodMpago(obj));
      

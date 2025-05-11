@@ -55,6 +55,8 @@ typedef enum { false=0,true=1} bool;
 #define TOK2 "$2"
 #define TOK3 "$3"
 #define TOK4 "$4"
+#define MAXFECHALNG 25
+
 //config DabaBase Access
 char *getServer();
 char *getDataBase();

@@ -116,7 +116,7 @@ static void *init_DetFactura(void *self)
   obj->constructor 	    = DetFactura_new;
   obj->sizeObj 		    = sizeof(obj_DetFactura*);
   // inicializar cada puntero a una referencia relacionada, para ver cuando se busca por el id..
-    obj->factura   = NULL;
+  obj->factura   = NULL;
   obj->producto   = NULL;
 
   //incializacion de la interfaz de la entidad

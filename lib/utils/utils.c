@@ -183,12 +183,12 @@ char *getDiaFecha(char *fechaVal)
 
 char *getFechaHora()
 {
-     char *ffecha;
-     time_t t = time(NULL);
-     struct tm tm = *localtime(&t);
-     ffecha = malloc(sizeof(char)*MAXFECHA);
-     snprintf( ffecha, MAXFECHA, "%d-%02d-%02d %02d:%02d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,tm.tm_hour, tm.tm_min);
-     return ffecha;
+    char *ffecha;
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    ffecha = malloc(sizeof(char)*MAXFECHALNG);     
+    snprintf(ffecha, MAXFECHALNG, "%d-%02d-%02d %02d:%02d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,tm.tm_hour, tm.tm_min);
+    return ffecha;
 }
 //----------------------------------------------------
 void inicializarArregloInt(int *arreglo, int cantidad, int valor){

@@ -70,7 +70,8 @@ void cargarCliente(){
 				printf("Ingreso de cliente realizado con exito \n");
 			else
 				printf("Error al ingresar el cliente en la base de datos \n");		
-			
+		
+		
 			//Libero memoria.
 			free(usuario);
 			free(clave);
