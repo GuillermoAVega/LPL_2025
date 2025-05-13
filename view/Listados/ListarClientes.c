@@ -37,14 +37,14 @@ void listarClienteEnArchivo(FILE *archivo, int numeroCliente, Object *obj){
 	obj_Cliente *cliente = (obj_Cliente *) obj;
     obj_Localidad *localidad = cliente->getLocalidadObj(cliente); 
 
-
     fprintf(archivo, "---------------------------------\n");
     fprintf(archivo, "Cliente %d \n", numeroCliente);
     fprintf(archivo, "Usuario: %s \n", cliente->getUsuario(cliente));
     fprintf(archivo, "Cuil: %s \n", cliente->getCuil(cliente));
     fprintf(archivo, "Localidad: %s \n", localidad->getNombre(localidad));
-    fprintf(archivo, "--------------------------------- \n \n");
-	
+    fprintf(archivo, "--------------------------------- \n");
+    
+	cliente->destroyInternal(cliente);
 }
 
 
@@ -94,7 +94,28 @@ void listarClientes() {
 		 	mostrarCliente(i, (Object *) item);
 		}
 		
-		exportarArchivo(lista, size);
+		if(confirma("Desea guardar el listado en un archivo? s/n")){
+
+			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
+		
+			FILE *archivo = fopen(nombreArchivo, "w");
+			
+			if(archivo != NULL){
+				
+				for(i=0;i<size;++i){
+			   		item = ((Object **)lista)[i]; 
+					listarClienteEnArchivo(archivo, i, (Object *)item);
+				}
+				
+				fclose(archivo);
+			}
+			else{
+				printf("Error al abrir archivo");
+			}
+		
+			free(nombreArchivo);
+			//Mostrar que se hizo correctamente.
+		}
 		
 		destroyObj(cliente);
 		destroyObjList(lista,size);

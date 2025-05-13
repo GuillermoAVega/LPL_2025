@@ -16,6 +16,47 @@ typedef struct {
 	
 } t_infoMedio;
 
+
+void mostrarMedioPago(Object *obj, int numeroMedio, int cantidadPagos){
+	
+	obj_MedioPago *medioPago = (obj_MedioPago *) obj;
+	obj_Banco *banco = medioPago->getBancoObj(medioPago);
+	
+	printf("---------------------------------\n");
+	printf("Medio de Pago: %d \n", numeroMedio);
+	printf("Descripcion: %s \n", medioPago->getDescripcion(medioPago));
+	printf("Banco: %s \n", banco->getNombre(banco));
+	printf("Cantidad de pagos realizados: %d \n", cantidadPagos);
+	printf("---------------------------------\n");
+	
+	medioPago->destroyInternal(medioPago);
+}
+
+
+void listarMedioPagoArchivo(FILE *archivo, Object *obj, int numeroMedio, int cantidadPagos){
+	
+	obj_MedioPago *medioPago = (obj_MedioPago *) obj;
+	obj_Banco *banco = medioPago->getBancoObj(medioPago);
+	
+	fprintf(archivo, "---------------------------------\n");
+	fprintf(archivo, "Medio de Pago: %d \n", numeroMedio);
+	fprintf(archivo, "Descripcion: %s \n", medioPago->getDescripcion(medioPago));
+	fprintf(archivo, "Banco: %s \n", banco->getNombre(banco));
+	fprintf(archivo, "Cantidad de pagos realizados: %d \n", cantidadPagos);
+	fprintf(archivo, "---------------------------------\n");
+	
+	medioPago->destroyInternal(medioPago);
+}
+
+
+
+	
+	
+	
+	
+
+
+
 int cmpInfoMedio(const void *a, const void *b){
 	
 	t_infoMedio *MedioPagoA=(t_infoMedio *)a;
@@ -49,9 +90,35 @@ void listarMpMasUsados(){
 		qsort(mediosPago,size,sizeof(t_infoMedio),cmpInfoMedio); 
 		for (i = 0; i < size && i < 3;++i){
 			itemMedio = ((obj_MedioPago **)lista)[mediosPago[i].posMedioPago];
-			printf("%s - cant: %d \n",itemMedio->getDescripcion(itemMedio),mediosPago[i].cantidad);
+			mostrarMedioPago((Object *)itemMedio, i + 1, mediosPago[i].cantidad);
+			//printf("%s - cant: %d \n",itemMedio->getDescripcion(itemMedio),mediosPago[i].cantidad);
 			
-		}	
+		}
+		
+		if(confirma("Desea guardar el listado en un archivo? s/n")){
+
+			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
+		
+			FILE *archivo = fopen(nombreArchivo, "w");
+			
+			if(archivo != NULL){
+				
+				for(i=0; i < size && i < 3;++i){
+					itemMedio = ((obj_MedioPago **)lista)[mediosPago[i].posMedioPago];
+			   		listarMedioPagoArchivo(archivo, (Object *)itemMedio, i + 1, mediosPago[i].cantidad);
+				}
+				
+				fclose(archivo);
+			}
+			else{
+				printf("Error al abrir archivo");
+			}
+		
+			free(nombreArchivo);
+			//Mostrar que se hizo correctamente.
+		}
+		
+			
 		
 		destroyObjList(lista,size); //liberar listado de clientes
 	

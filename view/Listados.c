@@ -14,42 +14,6 @@
 
 
 
-void cargarArchivo(FILE *archivo, int size, void *lista){
-	
-	int i;
-	void *item;
-	char *cadena;
-	
-	for(i=0;i<size;++i){
-   		item = ((Object **)lista)[i]; 
-   		listarClienteEnArchivo(archivo, i, (Object *)item);
-		free(cadena);
-	}
-		
-}
-
-
-void exportarArchivo(void *lista, int size){
-
-		if(confirma("Desea guardar el listado en un archivo? s/n")){
-	
-			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
-		
-			FILE *archivo = fopen(nombreArchivo, "w");
-			
-			if(archivo != NULL){
-				cargarArchivo(archivo, size, lista);
-				fclose(archivo);
-			}
-			else{
-				printf("Error al abrir archivo");
-			}
-			
-		free(nombreArchivo);
-		//Mostrar que se hizo correctamente.
-	}
-}
-
 
 void gestionarListados(){
 

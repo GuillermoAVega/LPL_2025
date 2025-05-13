@@ -1,0 +1,18 @@
+---------------------------------
+Medio de Pago: 1 
+Descripcion: Efectivo 
+Banco: UALINTEC 
+Cantidad de pagos realizados: 7 
+---------------------------------
+---------------------------------
+Medio de Pago: 2 
+Descripcion: Tarjeta de debito 
+Banco: Banco Galicia 
+Cantidad de pagos realizados: 3 
+---------------------------------
+---------------------------------
+Medio de Pago: 3 
+Descripcion: Tarjeta de credito 
+Banco: Banco Nacion 
+Cantidad de pagos realizados: 3 
+---------------------------------

@@ -77,9 +77,37 @@ void listProdMasPedidos(){
 		{
 			itemProducto = ((obj_Producto **)list)[k];
 			if(k < MAX_PRODUCTOS){
-				printf("%s  - cant: %d \n",itemProducto->getDescripcion(itemProducto),productos[k].cantidad);	
+				
+				mostrarProducto(k, (Object *)itemProducto);
+				
 			}
 		}
+		
+		if(confirma("Desea guardar el listado en un archivo? s/n")){
+
+			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
+			
+			FILE *archivo = fopen(nombreArchivo, "w");
+			
+			if(archivo != NULL){
+				
+				for(i=0;i<size;++i){
+			   		itemProducto = ((obj_Producto **)list)[i]; 
+					if(i < MAX_PRODUCTOS){
+						listarProductoEnArchivo(archivo, i + 1, (Object *)itemProducto);
+					}
+				}	
+				
+				fclose(archivo);
+			}
+			else{
+				printf("Error al abrir archivo");
+			}
+		
+			free(nombreArchivo);
+		}
+		
+		
 		destroyObjList(list,size);
 	  }	
 	  
