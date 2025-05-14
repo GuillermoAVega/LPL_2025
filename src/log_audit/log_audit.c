@@ -7,13 +7,13 @@ char *toString_AuditoriaImpl(void *self)
 {
     obj_Auditoria *obj = this(self);
 
-	int size = snprintf(NULL, 0, "Fecha: %s - Objeto: % - Detalle: %s \n", obj->getFecha(obj), obj->getObjeto(obj), obj->getDetalle(obj));
+	int size = snprintf(NULL, 0, "Fecha: %s - Objeto: %s - Detalle: %s \n", obj->getFecha(obj), obj->getObjeto(obj), obj->getDetalle(obj));
      
 	char *resultado = malloc(size + 1);
 	if (resultado == NULL) 
 		return NULL;
 		
-	snprintf(resultado, size ,"Fecha: %s - Objeto: % - Detalle: %s \n", obj->getFecha(obj), obj->getObjeto(obj), obj->getDetalle(obj));
+	snprintf(resultado, size ,"Fecha: %s - Objeto: %s - Detalle: %s \n", obj->getFecha(obj), obj->getObjeto(obj), obj->getDetalle(obj));
 	
 	return resultado;   
 }

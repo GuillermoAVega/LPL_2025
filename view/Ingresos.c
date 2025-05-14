@@ -27,7 +27,7 @@ void mostrarObjetos( void *(*constructor)() ){
 		
 	}
 
-	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
+	//destroyObjList(list,size); // liberar listado, cada instancia creada en el listado ROMPE.
 	destroyObj(obj);	
 }
 

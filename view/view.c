@@ -10,9 +10,9 @@
 #define LEN(x) (sizeof(x) / sizeof(x[0]))
 
 
-int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso )
+int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso)
 {
-	int valor;
+	int valor = 0;
 	while (true)
 	{
 		if(clear) 
@@ -44,7 +44,7 @@ char *leerCadena(char *msj_pant,int max_cad){
 	else{
 		if(fgets(cadena, max_cad, stdin) != NULL){
 			int size = strlen(cadena);
-			if(size > 0)	
+			if(size > 1)	
 				cadena[size - 1] = '\0';
 			return cadena;
 		}
@@ -52,7 +52,6 @@ char *leerCadena(char *msj_pant,int max_cad){
 	
 	return NULL;
 }
-
 
 void registrarEvento(char *objeto, char *descripcion){
 	static int codigo = 1;
@@ -81,7 +80,7 @@ void registrarEvento(char *objeto, char *descripcion){
 
 float leerFloat(char *msj_pant ){
 	
-	float n;
+	float n = 0;
 	
 	printf("%s",msj_pant);
 	fflush(stdin);

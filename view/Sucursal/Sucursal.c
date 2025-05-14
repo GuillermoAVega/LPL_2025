@@ -9,8 +9,9 @@ void cargarSucursal(){
 	obj_Localidad *loc = Localidad_new();
 	
 	if (loc->findbykey(loc,cod_postal) != NOT_FOUND){
-		obj_Sucursal *suc = Sucursal_new();
 		
+		char buffer[MAX560];
+		obj_Sucursal *suc = Sucursal_new();
 		char *nombre = leerCadena("Ingrese nombre de la sucursal:\n", MAX50);
 		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n", MAX120);
 		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n", MAX25);
@@ -23,6 +24,17 @@ void cargarSucursal(){
 		
 		if (suc->saveObj(suc) == true){
 			printf("Ingreso exitoso\n");
+			
+			obj_Localidad *localidad = suc->getLocalidadObj(suc);
+			
+			snprintf(buffer, MAX560, "Crea la sucursal numero = %d, nombre = %s, direccion = %s, localidad = %s"
+					,suc->getCodigo(suc)
+					,suc->getNombre(suc)
+					,suc->getDireccion(suc)
+					,localidad->getNombre(localidad));
+			
+			registrarEvento("Sucursal", buffer);
+			
 		}
 		else
 			printf("Error al ingresar la sucursal\n");
@@ -35,6 +47,7 @@ void cargarSucursal(){
 	else
 		printf("No existe la localidad ingresada.\n");
 	
+	loc->destroyInternal(loc);
 	destroyObj(loc);
 }
 
@@ -92,8 +105,11 @@ void modificarSucursal(){
 			}
 		}
 		
-		if(sucursal->saveObj(sucursal) == true)
+		if(sucursal->saveObj(sucursal) == true){
 			printf("Modificacion exitosa.\n");
+			registrarEvento("Sucursal", buffer);
+			system("PAUSE");
+		}
 		else
 			printf("Error al modificar sucursal.\n");
 	}

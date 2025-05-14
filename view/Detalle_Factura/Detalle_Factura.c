@@ -7,9 +7,13 @@ void cargarDetalleFactura(){
 	
 	if(factura->findbykey(factura, codigoFactura) != NOT_FOUND){
 		
-		
 		//Buscas detalle factura, si no exist vale 1, Sino buscas el ultimo renglon del detalle factura + 1.
-		int renglon = 1;
+		
+		void *list;
+		
+		char criterio[MAX_SQL];
+		snprintf(criterio, MAX_SQL, "cod_factura = %d", codigoFactura);
+		int renglon = (factura->findAll(factura,&list, criterio)) + 1;
 		
 		do{
 			//pido datos
@@ -23,6 +27,7 @@ void cargarDetalleFactura(){
 			if (producto->findbykey(producto,codProducto)!= NOT_FOUND){
 				if (producto->getStock(producto) == 0){
 					printf("No hay stock disponible \n");
+					system("PAUSE");
 					return;
 				}
 				

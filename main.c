@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include "includes/includes.h"
 
-const char *menuPrincipal[] = {"Ingresos", "Actualizaciones", "Listados"};
+const char *menuPrincipal[] = {"Ingresos", "Actualizaciones", "Listados", "Mostrar registros"};
 
 int main(int argc, char *argv[])
 {  
@@ -31,14 +31,17 @@ int main(int argc, char *argv[])
 	  		break;
 	  	
 	  	case 2: 
-	  		gestionarActualizaciones(); //VA DENTRO - opcion = mostrarMenu(menuActualizaciones, LEN(menuActualizaciones));		
+	  		gestionarActualizaciones(); 	
 	  		break;
 	  		
 	  	
 	  	case 3: 
-	  		gestionarListados(); //VA DENTRO - opcion = mostrarMenu(menuListados, LEN(menuListados));
+	  		gestionarListados(); 
 
 	  		break;
+	  		
+	  	case 4:
+		  	mostrarAuditoria();	
 	  		
 	  	}	
 	  	

@@ -14,6 +14,7 @@ void cargarProducto(){
 		if(codCategoria != -1){
 			
 			//Solicito valores para registrar el producto.
+			char buffer[MAX560];
 			char *descripcion = leerCadena("Ingrese la descripcion \n", MAX80);  //80 CARACTERES	
 			float precio = leerFloat("Ingrese el precio del producto \n");
 			float stock = leerFloat("Ingrese el stock del producto \n");
@@ -30,9 +31,22 @@ void cargarProducto(){
 			producto->setDisponible(producto, disponible);
 			
 			//Cargo el objeto en la BD.
-			if(producto->saveObj(producto) == true)
-				printf("Ingreso del producto realizado con exito \n");
+			if(producto->saveObj(producto) == true){
 				
+				printf("Ingreso del producto realizado con exito \n");
+				obj_Marca *marca = producto->getMarcaObj(producto);
+				obj_Categoria *categoria = producto->getCategoriaObj(producto);
+				
+				snprintf(buffer, MAX560, "Crea el producto con codigo = %d, descripcion = %s, marca = %s, categoria = %s"
+						,producto->getCodigo(producto)
+						,producto->getDescripcion(producto)
+						,marca->getDescripcion(marca)
+						,categoria->getDescripcion(categoria));
+				
+				registrarEvento("Producto", buffer);
+			}
+			
+			producto->destroyInternal(producto);
 			destroyObj(producto);
 			free(descripcion);
 		}
@@ -66,7 +80,6 @@ void modificarProducto(){
 					break;
 				}
 						
-			
 				case 2:{
 					int codigo = ingresarCodigo((void *) Categoria_new, "");
 
