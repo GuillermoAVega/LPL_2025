@@ -15,9 +15,10 @@ void cargarMarca(){
 	else
 		printf("Error al ingresar la marca\n");
 	
+	
+	system("PAUSE");
 	destroyObj(marca);
 	free(descripcion);
-	
 }
 
 

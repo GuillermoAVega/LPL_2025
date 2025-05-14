@@ -10,14 +10,15 @@ void cargarProducto(){
 	if(codMarca != -1){
 		
 		codCategoria = ingresarCodigo((void *) Categoria_new, "Las categorias registradas son: " );
-		
+
 		if(codCategoria != -1){
 			
 			//Solicito valores para registrar el producto.
 			char buffer[MAX560];
 			char *descripcion = leerCadena("Ingrese la descripcion \n", MAX80);  //80 CARACTERES	
-			float precio = leerFloat("Ingrese el precio del producto \n",1,0,1000000.00,-1);
-			float stock = leerFloat("Ingrese el stock del producto \n", 1,0,1000000.00,-1);
+			system("cls");
+			float precio = leerFloat("Ingrese el precio del producto \n",1,1,1000000.00, -1);
+			float stock = leerFloat("Ingrese el stock del producto \n", 1,1,1000000.00,-1);
 			bool disponible = confirma("El producto esta disponible? s/n");
 			
 			//Cargo los valores en el objeto.
@@ -46,6 +47,7 @@ void cargarProducto(){
 				registrarEvento("Producto", buffer);
 			}
 			
+			system("PAUSE");
 			producto->destroyInternal(producto);
 			destroyObj(producto);
 			free(descripcion);

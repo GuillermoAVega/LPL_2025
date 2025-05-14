@@ -32,6 +32,7 @@ int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngre
 
 char *leerCadena(char *msj_pant,int max_cad){
 	
+	system("cls");
 	printf("%s", msj_pant);
 	fflush(stdin);
 	
@@ -67,9 +68,6 @@ void registrarEvento(char *objeto, char *descripcion){
 	
 	if(auditoria->saveObj(auditoria) != true){
 		printf("No se registro el evento \n");
-	}
-	else{
-		printf("insercion exitosa");
 	}
 	
 	destroyObj(auditoria);

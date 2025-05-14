@@ -40,7 +40,7 @@ void cargarCliente(){
 	}
 	else{
 		
-		int codPostal = leerEntero("Ingrese el codigo postal \n",0,0,10000,-1); //INT - Definido en Cliente.h	
+		int codPostal = leerEntero("Ingrese el codigo postal \n",1,0,10000,-1); //INT - Definido en Cliente.h	
 	
 		obj_Localidad *loc = Localidad_new();
 		if(loc->findbykey(loc, codPostal) != NOT_FOUND){
@@ -79,7 +79,6 @@ void cargarCliente(){
 			else
 				printf("Error al ingresar el cliente en la base de datos \n");		
 		
-		
 			//Libero memoria.
 			free(usuario);
 			free(clave);
@@ -93,7 +92,7 @@ void cargarCliente(){
 			destroyObj(cliente);
 		}
 		else{
-			printf("No existe la localidad ingresada");
+			printf("No existe la localidad ingresada \n");
 		}			
 	}
 	free(cuil);

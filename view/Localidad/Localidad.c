@@ -17,12 +17,13 @@ void cargarLocalidad(){
 
 		if(loc->saveObj(loc) == true)
 			printf("Ingreso de localidad realizado con exito \n");
-			getch();
 		free(nombre);
 	}
 	else{
 		printf("Ya existe una localidad con ese codigo postal \n");
 	}				
+	
+	system("PAUSE");
 	destroyObj(loc);
 }
 

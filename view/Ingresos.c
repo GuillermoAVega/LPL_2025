@@ -38,6 +38,7 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 	Object *obj = constructor();
 			
 	do{
+		system("cls");
 		printf("%s \n", msj_pant);
 		mostrarObjetos( (void *) constructor); 
 		codigo = leerEntero("Ingrese el codigo correspondiente: \n", 0, 0, 10000, -1);
