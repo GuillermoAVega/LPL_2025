@@ -78,17 +78,24 @@ void registrarEvento(char *objeto, char *descripcion){
 
 
 
-float leerFloat(char *msj_pant ){
+float leerFloat(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso){
 	
-	float n = 0;
-	
-	printf("%s",msj_pant);
-	fflush(stdin);
-	scanf("%f", &n);
-	fflush(stdin);
-	
-	return n;
-	
+	float valor = 0;
+
+	while (true)
+	{
+		if(clear) 
+		  system("cls");
+		printf("%s",msj_pant);
+		fflush(stdin);
+		scanf("%f", &valor);
+		fflush(stdin);
+		if(valor>=minVal && valor<=maxVal)
+			return valor;
+		if(valor == corteIngreso)
+			return corteIngreso;		
+	}
+	return corteIngreso;	
 }
 
 int confirma(char *msj_pant){

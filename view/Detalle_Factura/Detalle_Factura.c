@@ -7,65 +7,62 @@ void cargarDetalleFactura(){
 	
 	if(factura->findbykey(factura, codigoFactura) != NOT_FOUND){
 		
-		//Buscas detalle factura, si no exist vale 1, Sino buscas el ultimo renglon del detalle factura + 1.
-		
+		//Enumera el renglon.
 		void *list;
-		
 		char criterio[MAX_SQL];
 		snprintf(criterio, MAX_SQL, "cod_factura = %d", codigoFactura);
 		int renglon = (factura->findAll(factura,&list, criterio)) + 1;
 		
 		do{
-			//pido datos
 			int reintentar = 1;
 			int cantidad; //cantidad del producto
 			obj_Producto *producto = Producto_new();
 			int codProducto = ingresarCodigo ( (void *) Producto_new ,  "Los productos registrados son: ");
-			if(codProducto == -1)
-				return;		
 			
-			if (producto->findbykey(producto,codProducto)!= NOT_FOUND){
-				if (producto->getStock(producto) == 0){
-					printf("No hay stock disponible \n");
-					system("PAUSE");
-					return;
-				}
-				
-				int disponible  = 0;
-				
-				do{ 
-					cantidad = leerEntero("Ingrese la cantidad del producto: \n",LIMPIAR,MIN_VAL,MAX_CODIGO,CORTE_INGRESO);
-					
-					if (cantidad <= producto->getStock(producto)){ //se verifica que la cantidad no supere el stock disponible
-						disponible = 1;
-						producto->setStock(producto,producto->getStock(producto)-cantidad); //actualizamos el stock del producto
-						producto->saveObj(producto);
+			if(codProducto != -1){		
+			
+				if (producto->findbykey(producto,codProducto)!= NOT_FOUND){
+			
+					if (producto->getStock(producto) == 0){
+						printf("No hay stock disponible \n");
+						system("PAUSE");
+						continue;
 					}
-				}while(disponible != 1 && (reintentar = confirma("Desea ingresar este producto? s/n")));
-			}
-
-			if(reintentar == 1){
-				
-				//creo el objeto
-				obj_DetFactura *detalleFactura = DetFactura_new();
-				
-				//set
-				detalleFactura->setPrecioUnit(detalleFactura,producto->getPrecio(producto));
-				detalleFactura->setCantidad(detalleFactura,cantidad);
-				detalleFactura->setCodFactura(detalleFactura,codigoFactura);
-				detalleFactura->setRenglon(detalleFactura,renglon++);
-				detalleFactura->setCodProducto(detalleFactura,codProducto);
-				
-				if(detalleFactura->saveObj(detalleFactura) == true)
-					printf("Ingreso del detalle realizado con exito \n");
-				
-				//libera
-				destroyObj(detalleFactura);
-				destroyObj(producto);
-				
+					
+					int disponible  = 0;
+					
+					do{ 
+						cantidad = leerEntero("Ingrese la cantidad del producto: \n", 1 ,MIN_VAL,MAX_CODIGO,CORTE_INGRESO);
+						
+						if (cantidad <= producto->getStock(producto)){ //se verifica que la cantidad no supere el stock disponible
+							disponible = 1;
+							producto->setStock(producto,producto->getStock(producto)-cantidad); //actualizamos el stock del producto
+							producto->saveObj(producto);
+						}
+					}while(disponible != 1 && (reintentar = confirma("Desea ingresar este producto? s/n")));
+				}
+	
+				if(reintentar == 1){
+					
+					//creo el objeto
+					obj_DetFactura *detalleFactura = DetFactura_new();
+					
+					//set
+					detalleFactura->setPrecioUnit(detalleFactura,producto->getPrecio(producto));
+					detalleFactura->setCantidad(detalleFactura,cantidad);
+					detalleFactura->setCodFactura(detalleFactura,codigoFactura);
+					detalleFactura->setRenglon(detalleFactura,renglon++);
+					detalleFactura->setCodProducto(detalleFactura,codProducto);
+					
+					if(detalleFactura->saveObj(detalleFactura) == true)
+						printf("Ingreso del detalle realizado con exito \n");
+									
+				}
 			}
 			
 		}while(confirma("Desea ingresar otro producto? s/n"));
+		
+		factura->destroyInternal(factura);
 		destroyObj(factura);
 	}
 
