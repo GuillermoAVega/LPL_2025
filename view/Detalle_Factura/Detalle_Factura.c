@@ -77,7 +77,7 @@ void modificarDetalleFactura(){
 	if (codFactura != -1){
 		
 		obj_Factura *factura = Factura_new();
-		
+		obj_DetFactura *detalleFactura;
 		if(factura->findbykey(factura, codFactura)){
 			int opcion;
 			
@@ -85,46 +85,58 @@ void modificarDetalleFactura(){
 						
 			int renglon = ingresarCodigo((void *)  DetFactura_new, "Ingrese el numero del renglon que desea modificar \n");	
 			
-			if (renglon == -1)
-				return;
-			obj_DetFactura *detalleFactura = DetFactura_new();
-			opcion=mostrarMenu(menuModificarDetalleFactura, LEN(menuModificarDetalleFactura));
-			
-			if (detalleFactura->findbykey(detalleFactura,renglon) == true){
-				switch(opcion){
-					case 1:{
-						int codProducto = ingresarCodigo((void *) Producto_new, "Ingrese el codigo del producto que desea agregar \n");
-						if (codProducto == -1)
-							return;
-						obj_Producto *producto = Producto_new();
-						if(producto->findbykey(producto,codProducto)){
-						//consulta si hay stock del producto, sino termina
-							if (producto->getStock(producto) == 0){
-								printf("No hay stock disponible \n");
-								return;
-							}
-							int disponible,cantidad = 0;
-							do{
-								cantidad = leerEntero("Ingrese la cantidad del producto: \n",LIMPIAR,MIN_VAL,MAX_CODIGO,CORTE_INGRESO);
+			if (renglon != -1){
+				
+				detalleFactura = DetFactura_new();
+				obj_Producto *producto;
+				opcion=mostrarMenu(menuModificarDetalleFactura, LEN(menuModificarDetalleFactura));
+				
+				if (detalleFactura->findbykey(detalleFactura,renglon) == true){
+					switch(opcion){
+						case 1:{
+							int codProducto = ingresarCodigo((void *) Producto_new, "Ingrese el codigo del producto que desea agregar \n");
 						
-								if (cantidad < producto->getStock(producto)){ //se verifica que la cantidad no supere el stock disponible
-									disponible = 1;
-									producto->setStock(producto,producto->getStock(producto)-cantidad); //actualizamos el stock del producto
+							if (codProducto != -1){		
+								obj_Producto *producto = Producto_new();
+								producto->findbykey(producto, codProducto);
+								
+								
+								//consulta si hay stock del producto, sino termina
+								if (producto->getStock(producto) == 0){
+									printf("No hay stock disponible \n");
+									return;
 								}
-							}while(disponible == 1 || confirma("Desea ingresar este producto? s/n"));
-							//set
-							detalleFactura->setCantidad(detalleFactura,cantidad);
-							detalleFactura->setCodProducto(detalleFactura,codProducto);
+								
+								int disponible, cantidad = 0;
+								
+								do{
+									cantidad = leerEntero("Ingrese la cantidad del producto: \n",LIMPIAR,MIN_VAL,MAX_CODIGO,CORTE_INGRESO);
+							
+									if (cantidad < producto->getStock(producto)){ //se verifica que la cantidad no supere el stock disponible
+										disponible = 1;
+										producto->setStock(producto,producto->getStock(producto)-cantidad); //actualizamos el stock del producto
+									}
+									
+								} while(disponible != 1 && confirma("No se posee stock suficiente para la cantidad solicitada. Desea reintentarlo? s/n"));
+								
+								//set
+								detalleFactura->setCantidad(detalleFactura,cantidad);
+								detalleFactura->setCodProducto(detalleFactura,codProducto);
+								destroyObj(producto);
+							}
+							break;
 						}
-						destroyObj(producto);
-						break;
-					}
-					case 2:{
-						int codProducto = detalleFactura->getCodProducto(detalleFactura);
-						obj_Producto *producto = Producto_new();
-						const char *menuAgregaQuita[] = {"Agregar productos","Quitar productos"};
-						int respuesta = mostrarMenu(menuAgregaQuita, LEN(menuAgregaQuita));
-						if (producto->findbykey(producto,codProducto)){
+						case 2:{
+							int codProducto = detalleFactura->getCodProducto(detalleFactura);
+							
+							producto = Producto_new();
+							
+							const char *menuAgregaQuita[] = {"Agregar productos","Quitar productos"};
+							
+							int respuesta = mostrarMenu(menuAgregaQuita, LEN(menuAgregaQuita));
+							
+							producto->findbykey(producto,codProducto);
+							
 							switch(respuesta){
 								case 1:{
 									int agrega,cantidad = detalleFactura->getCantidad(detalleFactura);		
@@ -150,15 +162,13 @@ void modificarDetalleFactura(){
 						break;
 					}
 				}
-			}
-			if(detalleFactura->saveObj(detalleFactura)==true)
-				printf("Cambios realizados con exito \n");
-			system("PAUSE");
-			destroyObj(detalleFactura);
-	}
-
-	
-	
+			}	
+		}
+			
+		if(detalleFactura->saveObj(detalleFactura)==true)
+			printf("Cambios realizados con exito \n");
+		system("PAUSE");
+		destroyObj(detalleFactura);
 	}
 }
 
