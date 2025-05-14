@@ -5,7 +5,7 @@
 
 //Retorna el codigo del cliente con ese cuil. -1 si no existe.
 int buscarCliente(char *cuilIngresado){   
-	
+
 	obj_Cliente *cliente = Cliente_new();
 	void *list, *item;
 	int codigo = -1;
@@ -33,6 +33,7 @@ void cargarCliente(){
 
 	//Pido los datos.
 	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h	
+	char buffer[MAX560];
 	
 	if (buscarCliente(cuil) != -1){
 		printf("Ya existe un cliente registrado con ese cuit \n");
@@ -66,8 +67,16 @@ void cargarCliente(){
 			cliente->setCelular(cliente, celular);
 			
 			//Guardo al cliente en la BD.
-			if(cliente->saveObj(cliente) == true)
+			if(cliente->saveObj(cliente) == true){
 				printf("Ingreso de cliente realizado con exito \n");
+				/* ARMAR BUFFER DE LO QUE SE VA A MOSTRAR EN LA DESCRIPCION.
+				snprintf(buffer, 
+						MAX560,
+						"Crea el cliente: Usuario: %s, ", cliente->getUsuario(cliente),claveAnterior, clave);
+				
+				*/
+				registrarEvento("Cliente", buffer);
+			}
 			else
 				printf("Error al ingresar el cliente en la base de datos \n");		
 		
@@ -107,13 +116,14 @@ void modificarCliente(){
 		
 		obj_Cliente *cliente = Cliente_new();
 		cliente->findbykey(cliente, codigo);
-		
+		char buffer[MAX560];
 		opcion = mostrarMenu(menuModificarCliente, LEN(menuModificarCliente));
 		
 		switch (opcion){
 			
 			case 1: {
 				char *usuario = leerCadena("Ingrese el nuevo nombre de usuario \n", MAX90);	
+				snprintf(buffer, MAX560,"Modifica el nombre del usuario con cuil numero %s a %s", cliente->getCuil(cliente), usuario);
 				cliente->setUsuario(cliente, usuario);
 				free(usuario);
 				break;
@@ -121,15 +131,19 @@ void modificarCliente(){
 				
 			case 2:{
 				char *clave = leerCadena("Ingrese la nueva clave del usuario \n", MAX120);	
+				snprintf(buffer, MAX560,"Modifica la clave del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente),cliente->getClave(cliente), clave);
 				cliente->setClave(cliente, clave);
+				
 				free(clave);	
 				break;
 			}
+			
 			case 3: {
 				char *nuevoCuil = leerCadena("Ingrese el nuevo cuil del usuario \n", MAX20);	
 				if(buscarCliente(nuevoCuil) == -1){
+					snprintf(buffer, MAX560,"Modifica el cuil de '%s' a '%s' %s", cliente->getCuil(cliente), nuevoCuil);
 					cliente->setCuil(cliente, nuevoCuil);
-					free(nuevoCuil);	
+					free(nuevoCuil);
 				}
 				else{
 					printf("Ya existe un cliente con ese cuil \n");
@@ -142,6 +156,7 @@ void modificarCliente(){
 			
 			case 4: {
 				char *razonSocial = leerCadena("Ingrese la nueva razon social del usuario \n", MAX90);	
+				snprintf(buffer, MAX560,"Modifica la razon social del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getRazonSocial(cliente), razonSocial);
 				cliente->setRazonSocial(cliente, razonSocial);
 				free(razonSocial);	
 				break;	
@@ -149,6 +164,7 @@ void modificarCliente(){
 		
 			case 5: {
 				char *direccion = leerCadena("Ingrese la nueva direccion del usuario \n", MAX120);	
+				snprintf(buffer, MAX560,"Modifica la direccion del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getDireccion(cliente), direccion);
 				cliente->setDireccion(cliente, direccion);
 				free(direccion);		
 				break;
@@ -158,14 +174,24 @@ void modificarCliente(){
 			case 6: {
 	
 				int codPostal = ingresarCodigo((void *) Localidad_new, "Las localidades registradas son: " );
-				if(codPostal == -1)
-					return;
-				cliente->setCodPostal(cliente, codPostal);
+					
+				if(codigo != -1){						
+						obj_Localidad *nuevaLocalidad, *localidadAnterior = cliente->getLocalidadObj(cliente);
+						nuevaLocalidad->findbykey(nuevaLocalidad,codigo);
+						snprintf(buffer, MAX560,"Modifica la localidad del usuario con cuil numero %s de '%s' a '%s'", cliente->getCuil(cliente), localidadAnterior->getNombre(localidadAnterior), nuevaLocalidad->getNombre(nuevaLocalidad));
+						cliente->setCodPostal(cliente, codigo);
+						destroyObj(localidadAnterior);
+				}
+				else{
+						return;
+				}		
+				
 				break;
 			}
 			
 			case 7: {
 				char *email = leerCadena("Ingrese el nuevo mail del usuario \n", MAX90);	
+				snprintf(buffer, MAX560,"Modifica el email del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getEmail(cliente), email);
 				cliente->setEmail(cliente, email);
 				free(email);	
 				break;
@@ -174,14 +200,17 @@ void modificarCliente(){
 			case 8: {
 				char *celular = leerCadena("Ingrese el nuevo celular del usuario \n", MAX25);	
 				cliente->setCelular(cliente, celular);
+				snprintf(buffer, MAX560,"Modifica el celular del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getCelular(cliente), celular);
 				free(celular);	
 				break;
 			}
 		
 		}
 		
-		if(cliente->saveObj(cliente) == true)
+		if(cliente->saveObj(cliente) == true){
 			printf("Modificacion al cliente realizada con exito \n");
+			registrarEvento("Cliente", buffer);
+		}
 		
 		destroyObj(cliente);
 	}
