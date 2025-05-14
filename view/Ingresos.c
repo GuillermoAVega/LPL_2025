@@ -9,17 +9,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-const char *menuIngresos[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino"}; //MODIFICAR SUCURSAL DESTINO.
 
 void mostrarObjetos( void *(*constructor)() ){
 	
 	Object *obj;
-	
 	obj = constructor();
 	
 	void *list,*itm;
-	int i,size=0;
-	size = obj->findAll(obj,&list,NULL); // se invoca sin criterio - listar todos...
+	int i,size = obj->findAll(obj,&list,NULL); 
+
 	for(i=0;i<size;++i)
 	{
 		itm = ((Object **)list)[i];
@@ -29,9 +27,8 @@ void mostrarObjetos( void *(*constructor)() ){
 		
 	}
 
-	//destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
-	destroyObj(obj);
-	
+	destroyObjList(list,size); // liberar listado, cada instancia creada en el listado
+	destroyObj(obj);	
 }
 
 
@@ -53,48 +50,52 @@ int ingresarCodigo (void *(*constructor)(), char *msj_pant){
 		return -1;
 	else
 		return codigo;
-	
 }
 
 
 void gestionarIngresos(){
 	
-  	int opcion = mostrarMenu(menuIngresos, LEN(menuIngresos));
-  	system("cls");
-	switch(opcion){
-		case 1:
-			cargarLocalidad();
-			break;
+	const char *menuIngresos[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino"}; //MODIFICAR SUCURSAL DESTINO.
+	int opcion; 
+	  
+	do{
+		opcion = mostrarMenu(menuIngresos, LEN(menuIngresos));
 		
-		case 2:
-			cargarMarca();
-			break;
-		
-		case 3:
-			cargarProducto();
-			break;
-		
-		case 4:
-			cargarCliente();
-			break;
+		switch(opcion){
+			case 1:
+				cargarLocalidad();
+				break;
 			
-		case 5:
-			cargarSucursal();
-			break;
-		
-		case 6:
-			cargarFactura();
-			break;
-		
-		case 7:
-			cargarDetalleFactura();
-			break;
-		
-		case 8:
-			cargarSucursalDet();
-			break;
-		
-	}
+			case 2:
+				cargarMarca();
+				break;
+			
+			case 3:
+				cargarProducto();
+				break;
+			
+			case 4:
+				cargarCliente();
+				break;
+				
+			case 5:
+				cargarSucursal();
+				break;
+			
+			case 6:
+				cargarFactura();
+				break;
+			
+			case 7:
+				cargarDetalleFactura();
+				break;
+			
+			case 8:
+				cargarSucursalDet();
+				break;
+			
+		}
+	} while(opcion != -1); 
 }
 
 

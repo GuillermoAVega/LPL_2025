@@ -10,36 +10,35 @@
 #include <sys/stat.h>
 
 
-
-
-
-
-
 void gestionarListados(){
 
 	const char *menuListados[] = {"Clientes", "Productos", "Medios de pago mas usados", "Productos mas pedidos"};
+	int opcion;
 	
-	int opcion = mostrarMenu(menuListados, LEN(menuListados));
-  	system("cls");
-  	
-	switch(opcion){
-		case 1:
-			listarClientes();
-			break;
+	do{	
+		opcion = mostrarMenu(menuListados, LEN(menuListados));
+		  	
+		switch(opcion){
+			case 1:
+				listarClientes();
+				break;
+			
+			case 2:
+				listarProductos();
+				break;
+			
+			case 3:
+				listarMpMasUsados();
+				break;
+			
+			case 4:
+				listProdMasPedidos();
+				break;
+		}
 		
-		case 2:
-			listarProductos();
-			break;
-		
-		case 3:
-			listarMpMasUsados();
-			break;
-		
-		case 4:
-			listProdMasPedidos();
-			break;
-	}
+	} while(opcion != -1);
 }
+	
 
 
 

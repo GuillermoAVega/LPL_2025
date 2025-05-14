@@ -10,43 +10,43 @@
 #include <sys/stat.h>
 
 
-const char *menuActualizaciones[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura", "Sucursal destino"}; //MODIFICAR SUCURSAL DESTINO.
-
-
 void gestionarActualizaciones(){
+
+	const char *menuActualizaciones[] = {"Localidad", "Marca", "Producto", "Cliente", "Sucursal", "Factura", "Detalle Factura"}; 
+	int opcion;
 	
-  	int opcion = mostrarMenu(menuActualizaciones, LEN(menuActualizaciones));
-  	system("cls");
-  	
-	switch(opcion){
-		case 1:
-			modificarLocalidad();
-			break;
+	do{
+	  	opcion = mostrarMenu(menuActualizaciones, LEN(menuActualizaciones));
+	  	
+		switch(opcion){
+			case 1:
+				modificarLocalidad();
+				break;
+			
+			case 2:
+				modificarMarca();
+				break;
+			
+			case 3:
+				modificarProducto();
+				break;
+			
+			case 4:
+				modificarCliente();
+				break;
+			
+			case 5:
+				modificarSucursal();
+				break;
+			
+			case 6:
+				modificarFactura();
+				break;
+			
+			case 7:
+				modificarDetalleFactura();
+				break;
+		}
 		
-		case 2:
-			modificarMarca();
-			break;
-		
-		case 3:
-			modificarProducto();
-			break;
-		
-		case 4:
-			modificarCliente();
-			break;
-		
-		case 5:
-			modificarSucursal();
-			break;
-		
-		case 6:
-			modificarFactura();
-			break;
-		
-		case 7:
-			modificarDetalleFactura();
-			break;
-		
-		
-	}
+	} while(opcion != -1);
 }

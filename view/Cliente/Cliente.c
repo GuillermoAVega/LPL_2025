@@ -69,12 +69,11 @@ void cargarCliente(){
 			//Guardo al cliente en la BD.
 			if(cliente->saveObj(cliente) == true){
 				printf("Ingreso de cliente realizado con exito \n");
-				/* ARMAR BUFFER DE LO QUE SE VA A MOSTRAR EN LA DESCRIPCION.
-				snprintf(buffer, 
-						MAX560,
-						"Crea el cliente: Usuario: %s, ", cliente->getUsuario(cliente),claveAnterior, clave);
+				snprintf(buffer, MAX560, "Crea el cliente con codigo = %d, usuario = %s, cuil = %s"
+						,cliente->getCodigo(cliente)
+						,cliente->getUsuario(cliente)
+						,cliente->getCuil(cliente));
 				
-				*/
 				registrarEvento("Cliente", buffer);
 			}
 			else

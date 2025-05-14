@@ -62,12 +62,9 @@ void registrarEvento(char *objeto, char *descripcion){
 	auditoria->setCodigo(auditoria, codigo++);
 	auditoria->setDetalle(auditoria, descripcion);
 	
-	
 	char *fecha = getFechaHora();
 	auditoria->setFecha(auditoria, fecha);
 	auditoria->setObjeto(auditoria, objeto);
-	
-	setDebug(1);
 	
 	if(auditoria->saveObj(auditoria) != true){
 		printf("No se registro el evento \n");
@@ -77,7 +74,7 @@ void registrarEvento(char *objeto, char *descripcion){
 	}
 	
 	destroyObj(auditoria);
-	//free(fecha);
+	free(fecha);
 }
 
 
@@ -110,7 +107,6 @@ int confirma(char *msj_pant){
 	return (c == 's' || c == 'S');
 }
 
-
 int mostrarMenu(char *opciones[], int cantidadOpciones){
 	
 	int i, respuesta;
@@ -128,16 +124,7 @@ int mostrarMenu(char *opciones[], int cantidadOpciones){
 	printf("Ingrese -1 para salir \n");	
 	printf("---------------------------------\n");
 	respuesta = leerEntero("", 0, 1, cantidadOpciones, -1);
-	
+	system("cls");
 	return (respuesta);
 }
-
-
-	
-
-
-
-/// otras funciones para interaccionar con el usuario.
-
-
 

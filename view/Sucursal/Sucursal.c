@@ -4,6 +4,7 @@
 
 void cargarSucursal(){
 	static int codigo = 0;
+	
 	int cod_postal = leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);	
 	obj_Localidad *loc = Localidad_new();
 	
@@ -11,8 +12,8 @@ void cargarSucursal(){
 		obj_Sucursal *suc = Sucursal_new();
 		
 		char *nombre = leerCadena("Ingrese nombre de la sucursal:\n", MAX50);
-		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n",MAX120);
-		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n",MAX25);
+		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n", MAX120);
+		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n", MAX25);
 		
 		suc->setCodigo(suc,codigo++);
 		suc->setNombre(suc,nombre);
@@ -30,10 +31,10 @@ void cargarSucursal(){
 		free(direccion);
 		free(telefono);	
 		destroyObj(suc);
-	}else
+	}
+	else
 		printf("No existe la localidad ingresada.\n");
 	
-
 	destroyObj(loc);
 }
 
@@ -78,11 +79,13 @@ void modificarSucursal(){
 				int codpostal = leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);
 				obj_Localidad *localidadActual = Localidad_new();
 				obj_Localidad *localidadSucAnterior;
+				
 				if (localidadActual->findbykey(localidadActual,codpostal) != NOT_FOUND){
 					localidadSucAnterior = sucursal->getLocalidadObj(sucursal);
 					snprintf(buffer, MAX560,"Modifica el telefono de la sucursal numero %d de '%s' a '%s'", sucursal->getCodigo(sucursal), localidadSucAnterior->getNombre(localidadSucAnterior), localidadActual->getNombre(localidadActual));
 					sucursal->setCodPostal(sucursal,codpostal);
-				}else
+				}
+				else
 					printf("No existe una localidad con el codigo postal ingresado.\n");
 				destroyObj(localidadSucAnterior);
 				break;
