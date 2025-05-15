@@ -14,4 +14,5 @@
 #define MIN_VAL 0
 #define MAX_CODIGO 10000
 #define CORTE_INGRESO -1
+#define TRUE 1
 

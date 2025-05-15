@@ -14,18 +14,20 @@ THIS(obj_DetFactura)// crea definicion de funcion this para este modulo. .. Macr
 
 char  *toString_DetFacturaImpl(void *self)
 {
-     obj_DetFactura *obj=this(self);  
-	 obj_Producto *prod = Producto_new();    
-     int size = snprintf(NULL, 0, "Codigo factura: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
-	 					 obj->getCodFactura(obj), obj->getCodProducto(obj), prod->getDescripcion(prod),prod->getPrecio(prod),obj->getCantidad(obj));
+    obj_DetFactura *obj=this(self);  
+ 	obj_Producto *producto = obj->getProductoObj(obj);
+     int size = MAX_SQL;
      
-	 char *resultado = malloc(size +1);
-     if (resultado == NULL) return NULL;
+ 	char *resultado = malloc(size +1);
+     if (resultado == NULL){
+     	destroyObj(producto);
+		return NULL;
+	 } 
      sprintf(resultado, "Codigo factura: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
-	 					 obj->getCodFactura(obj), obj->getCodProducto(obj), prod->getDescripcion(prod),prod->getPrecio(prod),obj->getCantidad(obj));
+  obj->getCodFactura(obj), obj->getCodProducto(obj), producto->getDescripcion(producto),producto->getPrecio(producto),obj->getCantidad(obj));
     
-    destroyObj(prod);
-	 return resultado;
+     destroyObj(producto);
+ return resultado;
 }
 
 static int getCodFacturaDetFactura_Impl(void *self)

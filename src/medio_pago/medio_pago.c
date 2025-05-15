@@ -8,12 +8,17 @@ THIS(obj_MedioPago)// crea definicion de funcion this para este modulo. .. Macro
 //----------------------------------------------------
 char *toString_MedioPagoImpl(void *self)
 {
-	//falta banco y m_pago
-     obj_MedioPago *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
+     obj_MedioPago *obj=this(self);     
+     obj_Banco *banco = obj->getBancoObj(obj); 
+     int size = MAX_SQL; 
 	 char *resultado = malloc(size +1);
-     if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj));
+     if (resultado == NULL){
+	        destroyObj(banco);
+		return NULL;
+		}
+      sprintf(resultado,"%d - %s - Banco:%s\n", obj->getCodigo(obj), obj->getDescripcion(obj), banco->getNombre(banco));
+     
+     destroyObj(banco);
      
      return resultado;
 }

@@ -10,7 +10,7 @@ void cargarLocalidad(){
 	if(loc->findbykey(loc, codPostal) == NOT_FOUND){
 		system("cls");
 		
-		char *nombre = leerCadena("Ingrese el nombre de la localidad \n", MAX60); 
+		char *nombre = leerCadena("Ingrese el nombre de la localidad \n", MAX60, FALSE); 
 
 		loc->setCodpostal(loc, codPostal);
 		loc->setNombre(loc, nombre);
@@ -32,23 +32,24 @@ void modificarLocalidad(){
 
 	int codPostal = ingresarCodigo((void *) Localidad_new, "Ingrese el codigo postal de la localidad que desea modificar: \n");	
 	
-	if (codPostal == -1)
-		return;
+	if (codPostal != -1){
+		
+		obj_Localidad *localidad = Localidad_new();
+		localidad->findbykey(localidad, codPostal);
+		
+		char *nombreLocalidad = leerCadena("Ingrese el nuevo nombre de la localidad \n", MAX60, TRUE); 
+		
+		localidad->setNombre(localidad, nombreLocalidad);
+		
+		if(localidad->saveObj(localidad) == true)
+			printf("Actualizacion de la localidad realizada con exito \n");
+			system("PAUSE");
+		
+		free(nombreLocalidad);
+		destroyObj(localidad); 
+	}
 	
-	obj_Localidad *localidad = Localidad_new();
-	localidad->findbykey(localidad, codPostal);
-	
-	char *nombreLocalidad = leerCadena("Ingrese el nuevo nombre de la localidad \n", MAX60); 
-	
-	localidad->setNombre(localidad, nombreLocalidad);
-	
-	if(localidad->saveObj(localidad) == true)
-		printf("Actualizacion de la localidad realizada con exito \n");
-		getch();	
-	
-	free(nombreLocalidad);
-	destroyObj(localidad);
-	
+
 }
 
 

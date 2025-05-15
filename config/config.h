@@ -36,6 +36,8 @@ typedef enum { false=0,true=1} bool;
 #define MAX_SQL 800
 #define MAX_WHERE_SQL 600
 #define MAXERR 400
+#define TRUE 1
+#define FALSE 0
 #define NULL_VALUE -100
 #define SQL_STR "select $1 from $2"
 #define SQL_INSERT "insert into $1 ($2) values ($3) RETURNING $4;"

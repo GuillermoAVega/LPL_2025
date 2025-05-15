@@ -96,8 +96,9 @@ void listarClientes() {
 		
 		if(confirma("Desea guardar el listado en un archivo? s/n")){
 
-			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
-		
+			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200, TRUE);
+			
+			strcat(nombreArchivo, ".txt");
 			FILE *archivo = fopen(nombreArchivo, "w");
 			
 			if(archivo != NULL){
@@ -112,11 +113,8 @@ void listarClientes() {
 			else{
 				printf("Error al abrir archivo");
 			}
-		
 			free(nombreArchivo);
-			//Mostrar que se hizo correctamente.
 		}
-		
 		destroyObj(cliente);
 		destroyObjList(lista,size);
 	}

@@ -7,23 +7,28 @@
 THIS(obj_SucursalDest)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-char *toString_SucursalDestImpl(void *self)
+char* toString_SucursalDestImpl(void *self)
 {
 	
      obj_SucursalDest *obj=this(self);
 	 obj_Sucursal *sucO = obj->getSucursalObjO(obj);
 	 obj_Sucursal *sucD = obj->getSucursalObjD(obj);
 	       
-     int size = snprintf(NULL, 0, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
-	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj)); 
+     int size = MAX_SQL; 
      
 	 char *resultado = malloc(size +1);
-     if (resultado == NULL) return NULL;
+     if (resultado == NULL){
+    	destroyObj(sucO);
+    	destroyObj(sucD);
+    	return NULL;	
+	 } 
      sprintf(resultado, "Sucursal origen: %d %s - Sucursal Destino:%d %s - Kilometros:%d\n",
 	 								sucO->getCodigo(sucO),sucO->getNombre(obj),sucD->getCodigo(obj),sucD->getNombre(obj));
      
+    destroyObj(sucO);
+    destroyObj(sucD);
      return resultado;
-     
+    
 }
 
 static int getCodSucOSucursalDest_Impl(void *self)

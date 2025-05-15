@@ -13,7 +13,7 @@ THIS(obj_Bulto)// crea definicion de funcion this para este modulo. .. Macro en 
 char *toString_BultoImpl(void *self)
 {
      obj_Bulto *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %d\n", obj->getCodigo(obj), obj->getEstado(obj)); 
+     int size = MAX_SQL; 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;

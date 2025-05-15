@@ -10,26 +10,26 @@ void cargarSucursalDet(){
 	
 		if (codSucDestino != -1){
 		
-			obj_SucursalDest *camino = SucursalDest_new();
-			
 			if (codSucOrigen != codSucDestino){
-				int km = leerEntero("Ingrese los kilometros entre las sucursales \n", 0, 0, 100000, -1);
-		
-				camino->setCodSucO(camino,codSucOrigen);
-				camino->setCodSucD(camino,codSucDestino);		
-				camino->setKm(camino,km);
-			
-				if (camino->saveObj(camino) == true)
-					printf("Ingreso exitoso\n");
-				else
-				printf("Error al ingresar el camino entre sucursales \n");
-			}
-			else{
+				int km = leerEntero("Ingrese los kilometros entre las sucursales \n", FALSE, 0, 100000, -1);
+					
+				if(km != -1){
+					obj_SucursalDest *camino = SucursalDest_new();
+					camino->setCodSucO(camino,codSucOrigen);
+					camino->setCodSucD(camino,codSucDestino);		
+					camino->setKm(camino,km);
 				
+					if (camino->saveObj(camino) == true)
+						printf("Ingreso exitoso\n");
+					else
+					printf("Error al ingresar el camino entre sucursales \n");			
+					destroyObj(camino);
+				}
+			}
+			else {
 				printf("Los codigos de la sucursal destino y la sucursal origen deben ser distintos \n");
-				
 			}
-			destroyObj(camino);
+			system("PAUSE");
 		}
 	}
 }

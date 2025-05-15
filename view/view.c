@@ -30,16 +30,17 @@ int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngre
 }
 
 
-char *leerCadena(char *msj_pant,int max_cad){
+char *leerCadena(char *msj_pant,int max_cad, int clear){
 	
-	system("cls");
+	if(clear) 
+		  system("cls");
+	
 	printf("%s", msj_pant);
 	fflush(stdin);
 	
 	char *cadena = (char *) malloc(sizeof(char) * max_cad);
 	
 	if(cadena == NULL){
-		
 		printf("Error al asignar memoria \n");
 	}
 	else{

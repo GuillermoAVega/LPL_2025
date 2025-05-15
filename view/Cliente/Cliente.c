@@ -32,7 +32,7 @@ void cargarCliente(){
 	static int codigo = 0;
 
 	//Pido los datos.
-	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h	
+	char *cuil = leerCadena("Ingrese el cuil \n", MAX20, TRUE); //20 CARACTERES - Definido en Cliente.h	
 	char buffer[MAX560];
 	
 	if (buscarCliente(cuil) != -1){
@@ -40,17 +40,17 @@ void cargarCliente(){
 	}
 	else{
 		
-		int codPostal = leerEntero("Ingrese el codigo postal \n",1,0,10000,-1); //INT - Definido en Cliente.h	
+		int codPostal = ingresarCodigo( (void *) Localidad_new, "Ingrese el codigo postal segun corresponda: " ); //leerEntero("Ingrese el codigo postal \n",1,0,10000,-1); //INT - Definido en Cliente.h	
 	
 		obj_Localidad *loc = Localidad_new();
 		if(loc->findbykey(loc, codPostal) != NOT_FOUND){
 			
-			char *usuario = leerCadena("Ingrese el nombre del usuario \n", MAX90); // 90 CARACTERES - Definido en Cliente.h
-			char *clave = leerCadena("Ingrese la clave \n", MAX120);  //120 CARACTERES - Definido en Cliente.h
-			char *razonSocial = leerCadena("Ingrese la razon social \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
-			char *direccion = leerCadena("Ingrese la direccion \n", MAX120); //120 CARACTERES - Definido en Cliente.h
-			char *email = leerCadena("Ingrese el mail \n", MAX90); //90 CARACTERES - Definido en Cliente.h 
-			char *celular = leerCadena("Ingrese el numero de telefono \n", MAX25); //25 CARACTERES - Definidos en Cliente.h
+			char *usuario = leerCadena("Ingrese el nombre del usuario \n", MAX90, FALSE); // 90 CARACTERES - Definido en Cliente.h
+			char *clave = leerCadena("Ingrese la clave \n", MAX120, FALSE);  //120 CARACTERES - Definido en Cliente.h
+			char *razonSocial = leerCadena("Ingrese la razon social \n", MAX90, FALSE); //90 CARACTERES - Definido en Cliente.h 
+			char *direccion = leerCadena("Ingrese la direccion \n", MAX120, FALSE); //120 CARACTERES - Definido en Cliente.h
+			char *email = leerCadena("Ingrese el mail \n", MAX90, FALSE); //90 CARACTERES - Definido en Cliente.h 
+			char *celular = leerCadena("Ingrese el numero de telefono \n", MAX25, FALSE); //25 CARACTERES - Definidos en Cliente.h
 			
 			//Creo el objeto cliente.
 			obj_Cliente *cliente = Cliente_new();
@@ -106,8 +106,8 @@ void modificarCliente(){
 
 	printf("Los clientes cargados son: \n");
 	mostrarObjetos((void *) Cliente_new);
-
-	char *cuil = leerCadena("Ingrese el cuil \n", MAX20); //20 CARACTERES - Definido en Cliente.h					
+	
+	char *cuil = leerCadena("Ingrese el cuil \n", MAX20, FALSE); //20 CARACTERES - Definido en Cliente.h					
 	int opcion, codigo = buscarCliente(cuil);
 
 	if(codigo != -1){
@@ -118,9 +118,14 @@ void modificarCliente(){
 		opcion = mostrarMenu(menuModificarCliente, LEN(menuModificarCliente));
 		
 		switch (opcion){
+
+			case -1:
+				return;
+				break;
+	
 			
 			case 1: {
-				char *usuario = leerCadena("Ingrese el nuevo nombre de usuario \n", MAX90);	
+				char *usuario = leerCadena("Ingrese el nuevo nombre de usuario \n", MAX90, TRUE);	
 				snprintf(buffer, MAX560,"Modifica el nombre del usuario con cuil numero %s a %s", cliente->getCuil(cliente), usuario);
 				cliente->setUsuario(cliente, usuario);
 				free(usuario);
@@ -128,7 +133,7 @@ void modificarCliente(){
 			}
 				
 			case 2:{
-				char *clave = leerCadena("Ingrese la nueva clave del usuario \n", MAX120);	
+				char *clave = leerCadena("Ingrese la nueva clave del usuario \n", MAX120, TRUE);	
 				snprintf(buffer, MAX560,"Modifica la clave del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente),cliente->getClave(cliente), clave);
 				cliente->setClave(cliente, clave);
 				
@@ -137,7 +142,7 @@ void modificarCliente(){
 			}
 			
 			case 3: {
-				char *nuevoCuil = leerCadena("Ingrese el nuevo cuil del usuario \n", MAX20);	
+				char *nuevoCuil = leerCadena("Ingrese el nuevo cuil del usuario \n", MAX20, TRUE);	
 				if(buscarCliente(nuevoCuil) == -1){
 					snprintf(buffer, MAX560,"Modifica el cuil de '%s' a '%s' %s", cliente->getCuil(cliente), nuevoCuil);
 					cliente->setCuil(cliente, nuevoCuil);
@@ -153,7 +158,7 @@ void modificarCliente(){
 			}
 			
 			case 4: {
-				char *razonSocial = leerCadena("Ingrese la nueva razon social del usuario \n", MAX90);	
+				char *razonSocial = leerCadena("Ingrese la nueva razon social del usuario \n", MAX90, TRUE);	
 				snprintf(buffer, MAX560,"Modifica la razon social del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getRazonSocial(cliente), razonSocial);
 				cliente->setRazonSocial(cliente, razonSocial);
 				free(razonSocial);	
@@ -161,7 +166,7 @@ void modificarCliente(){
 			}
 		
 			case 5: {
-				char *direccion = leerCadena("Ingrese la nueva direccion del usuario \n", MAX120);	
+				char *direccion = leerCadena("Ingrese la nueva direccion del usuario \n", MAX120, TRUE);	
 				snprintf(buffer, MAX560,"Modifica la direccion del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getDireccion(cliente), direccion);
 				cliente->setDireccion(cliente, direccion);
 				free(direccion);		
@@ -188,7 +193,7 @@ void modificarCliente(){
 			}
 			
 			case 7: {
-				char *email = leerCadena("Ingrese el nuevo mail del usuario \n", MAX90);	
+				char *email = leerCadena("Ingrese el nuevo mail del usuario \n", MAX90, TRUE);	
 				snprintf(buffer, MAX560,"Modifica el email del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getEmail(cliente), email);
 				cliente->setEmail(cliente, email);
 				free(email);	
@@ -196,7 +201,7 @@ void modificarCliente(){
 			}
 			
 			case 8: {
-				char *celular = leerCadena("Ingrese el nuevo celular del usuario \n", MAX25);	
+				char *celular = leerCadena("Ingrese el nuevo celular del usuario \n", MAX25, TRUE);	
 				cliente->setCelular(cliente, celular);
 				snprintf(buffer, MAX560,"Modifica el celular del usuario con cuil numero %s de '%s' a '%s' %s", cliente->getCuil(cliente), cliente->getCelular(cliente), celular);
 				free(celular);	

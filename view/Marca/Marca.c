@@ -3,7 +3,7 @@
 
 void cargarMarca(){
 	static int cod = 0;
-	char *descripcion = leerCadena("Ingrese una descripcion para la marca:\n",MAX50);
+	char *descripcion = leerCadena("Ingrese una descripcion para la marca:\n",MAX50, FALSE);
 	
 	obj_Marca *marca = Marca_new();
 	marca->setCodigo(marca,cod++);
@@ -14,7 +14,6 @@ void cargarMarca(){
 	}
 	else
 		printf("Error al ingresar la marca\n");
-	
 	
 	system("PAUSE");
 	destroyObj(marca);
@@ -29,7 +28,7 @@ void modificarMarca() {
 	obj_Marca *marca = Marca_new();
 	
 	if (marca->findbykey(marca,cod) != NOT_FOUND){
-		char *descripcion = leerCadena("Ingrese la nueva descripcion para la marca:\n", MAX50);
+		char *descripcion = leerCadena("Ingrese la nueva descripcion para la marca:\n", MAX50, TRUE);
 		marca->setDescripcion(marca,descripcion);
 	
 		if(marca->saveObj(marca) == true)
@@ -39,6 +38,6 @@ void modificarMarca() {
 		
 		free(descripcion);
 	}
-	
+	system("PAUSE");
 	destroyObj(marca);
 }

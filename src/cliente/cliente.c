@@ -7,20 +7,20 @@ THIS(obj_Cliente)// crea definicion de funcion this para este modulo. .. Macro e
 
 //----------------------------------------------------
 char *toString_ClienteImpl(void *self)
-{	//char cadena[200];
-	//faltan datos
-	
+{	
      obj_Cliente *obj=this(self);   
-	 obj_Localidad *loc = obj->getLocalidadObj(obj);
-	 char *cadena = loc->getNombre(loc);
-	 
-     int size = snprintf(NULL, 0, "%d - %s - %s -%s" , obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj), loc->getNombre(loc)); 
+	 obj_Localidad *localidad = obj->getLocalidadObj(obj);
+ 
+     int size = MAX_SQL; 
      
 	 char *resultado = malloc(size +1);
-     if (resultado == NULL) return NULL;
-     sprintf(resultado, "%d - %s - %s -%s", obj->getCodigo(obj), obj->getUsuario(obj),obj->getCuil(obj),loc->getNombre(loc));
+     if (resultado == NULL){
+     	destroyObj(localidad);
+		return NULL;
+	 } 
+     sprintf(resultado, " %s - %s -%s", obj->getUsuario(obj),obj->getCuil(obj),localidad->getNombre(localidad));
 	
-	 destroyObj(loc);
+	 destroyObj(localidad);
      return resultado;
 	
 }

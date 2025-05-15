@@ -14,7 +14,7 @@ char *toString_CompraImpl(void *self)
 { 
 	//faltan fechas
      obj_Compra *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - cod factura:%d\n", obj->getCodigo(obj), obj->getCodFactura(obj)); //calculo tamaño necesario
+     int size = MAX_SQL; 
      
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;

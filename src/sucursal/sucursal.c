@@ -6,11 +6,22 @@
 THIS(obj_Sucursal)// crea definicion de funcion this para este modulo. .. Macro en config.h
 
 //----------------------------------------------------
-static void toString_SucursalImpl(void *self)
+char* toString_SucursalImpl(void *self)
 {
      obj_Sucursal *obj=this(self);      
-     // version con algunos datos, ver como gestionar la posibilidad de listar mas informacion.
-     printf("%d - %s \n", obj->getCodigo(obj), obj->getNombre(obj)); 
+     obj_Localidad *localidad = obj->getLocalidadObj(obj);
+      int size = MAX_SQL;
+     
+	 char *resultado = malloc(size +1);
+      if (resultado == NULL){
+     	destroyObj(localidad);
+		 return NULL;
+	 } 
+
+     sprintf(resultado, "%d - %s - %s - %s\n", obj->getCodigo(obj), obj->getNombre(obj), obj->getDireccion(obj), localidad->getNombre(localidad));
+     
+     destroyObj(localidad);
+     return resultado;
 }
 
 static int getCodigoSucursal_Impl(void *self)

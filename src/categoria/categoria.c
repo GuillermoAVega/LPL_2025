@@ -8,14 +8,13 @@ THIS(obj_Categoria)// crea definicion de funcion this para este modulo. .. Macro
 char *toString_CategoriaImpl(void *self)
 {
      obj_Categoria *obj=this(self);           
-     int size = snprintf(NULL, 0, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj)); 
+     int size = MAX_SQL; 
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
      sprintf(resultado, "%d - %s\n", obj->getCodigo(obj), obj->getDescripcion(obj));
      
      return resultado;
 }
-
 static int getCodigoCategoria_Impl(void *self)
 { return  *((int *) getValue(self,POS_CODIGO_CAT));}
 //----------------------------------------------------

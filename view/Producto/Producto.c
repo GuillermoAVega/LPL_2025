@@ -15,10 +15,22 @@ void cargarProducto(){
 			
 			//Solicito valores para registrar el producto.
 			char buffer[MAX560];
-			char *descripcion = leerCadena("Ingrese la descripcion \n", MAX80);  //80 CARACTERES	
-			system("cls");
-			float precio = leerFloat("Ingrese el precio del producto \n",1,1,1000000.00, -1);
-			float stock = leerFloat("Ingrese el stock del producto \n", 1,1,1000000.00,-1);
+			char *descripcion = leerCadena("Ingrese la descripcion \n", MAX80, FALSE);  //80 CARACTERES	
+			
+			float precio = leerFloat("Ingrese el precio del producto \n",FALSE,1,1000000.00, -1);	
+			
+			if(precio == -1){
+				free(descripcion);
+				return;
+			}
+			
+			float stock = leerFloat("Ingrese el stock del producto \n", FALSE,1,1000000.00,-1);
+			
+			if(stock == -1){
+				free(descripcion);
+				return;
+			}
+				
 			bool disponible = confirma("El producto esta disponible? s/n");
 			
 			//Cargo los valores en el objeto.
@@ -74,8 +86,12 @@ void modificarProducto(){
 		system("cls");
 		
 		switch (opcion){	
+				case -1:
+					return;
+					break;
+	
 				case 1:{
-					char *descripcion = leerCadena("Ingrese la nueva descripcion del producto \n", MAX80);
+					char *descripcion = leerCadena("Ingrese la nueva descripcion del producto \n", MAX80, TRUE);
 					snprintf(buffer, MAX560,"Modifica la descripcion del producto nro %d de %s a %s", producto->getCodigo(producto), producto->getDescripcion(producto), descripcion);
 					producto->setDescripcion(producto, descripcion);
 					free(descripcion);
@@ -94,6 +110,7 @@ void modificarProducto(){
 						destroyObj(categoriaAnterior);
 					}
 					else{
+						destroyObj(producto);
 						return;
 					}
 					
@@ -114,6 +131,7 @@ void modificarProducto(){
 						destroyObj(marcaAnterior);
 					}
 					else{
+						destroyObj(producto);
 						return;
 					}
 
@@ -121,14 +139,26 @@ void modificarProducto(){
 				}
 					
 				case 4:{
-					float nuevoPrecio = leerFloat("Ingrese el nuevo precio del producto \n",1,0,1000000.00,-1);  
+					float nuevoPrecio = leerFloat("Ingrese el nuevo precio del producto \n",TRUE,0,1000000.00,-1);  
+					
+					if(nuevoPrecio == -1){
+						destroyObj(producto);
+						return;
+					}
+					
 					snprintf(buffer, MAX560,"Modifica el precio del producto nro %d de %.2f a %.2f", producto->getCodigo(producto), producto->getPrecio(producto), nuevoPrecio);
 					producto->setPrecio(producto, nuevoPrecio);
 					break;
 				}
 					
 				case 5:{
-					float stock = leerFloat("Ingrese el nuevo stock del producto \n",1,0,1000000.00,-1);  //VALIDAR QUE NO SEA NEGATIVO.
+					float stock = leerFloat("Ingrese el nuevo stock del producto \n",TRUE,0,1000000.00,-1);  //VALIDAR QUE NO SEA NEGATIVO.
+					
+					if(stock == -1){
+						destroyObj(producto);
+						return;
+					}
+					
 					snprintf(buffer, MAX560,"Modifica el stock del producto nro %d de %.2f a %.2f", producto->getCodigo(producto), producto->getStock(producto), stock);		
 					producto->setStock(producto, stock);
 					break;
@@ -143,14 +173,17 @@ void modificarProducto(){
 					producto->setDisponible(producto, disponibilidad);
 					break;
 				}
+				
 		}
 	
-		if(producto->saveObj(producto) == true)
-			printf("Modificacion al cliente realizada con exito \n");
+		
+		if(producto->saveObj(producto) == true){
+			printf("Modificacion al producto realizada con exito \n");
 			registrarEvento("Producto", buffer);
-			system("PAUSE");
+			system("PAUSE");		
+		}
 	}
-	
+
 	producto->destroyInternal(producto);
 	destroyObj(producto);	
 }

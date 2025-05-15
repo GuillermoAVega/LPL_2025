@@ -5,17 +5,18 @@
 void cargarSucursal(){
 	static int codigo = 0;
 	
-	int cod_postal = leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);	
+	int cod_postal = ingresarCodigo( (void *) Localidad_new, ""); //leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);	
 	obj_Localidad *loc = Localidad_new();
 	
-	if (loc->findbykey(loc,cod_postal) != NOT_FOUND){
+	if (cod_postal != -1){
 		
+		loc->findbykey(loc,cod_postal);
 		char buffer[MAX560];
-		obj_Sucursal *suc = Sucursal_new();
-		char *nombre = leerCadena("Ingrese nombre de la sucursal:\n", MAX50);
-		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n", MAX120);
-		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n", MAX25);
+		char *nombre = leerCadena("Ingrese nombre de la sucursal:\n", MAX50, FALSE);
+		char *direccion = leerCadena("Ingrese descripcion de la sucursal:\n", MAX120, FALSE);
+		char *telefono = leerCadena("Ingrese telefono de la sucursal:\n", MAX25, FALSE);
 		
+		obj_Sucursal *suc = Sucursal_new();
 		suc->setCodigo(suc,codigo++);
 		suc->setNombre(suc,nombre);
 		suc->setDireccion(suc,direccion);
@@ -33,8 +34,7 @@ void cargarSucursal(){
 					,suc->getDireccion(suc)
 					,localidad->getNombre(localidad));
 			
-			registrarEvento("Sucursal", buffer);
-			
+			registrarEvento("Sucursal", buffer);	
 		}
 		else
 			printf("Error al ingresar la sucursal\n");
@@ -47,6 +47,7 @@ void cargarSucursal(){
 	else
 		printf("No existe la localidad ingresada.\n");
 	
+	system("PAUSE");
 	loc->destroyInternal(loc);
 	destroyObj(loc);
 }
@@ -66,8 +67,13 @@ void modificarSucursal(){
 		char buffer[MAX560];
 	
 		switch (opcion){
+			
+			case -1:
+				return;
+				break;
+			
 			case 1: {
-				char *nombre = leerCadena("Ingrese nombre de la sucursal:\n",MAX50);
+				char *nombre = leerCadena("Ingrese nombre de la sucursal:\n",MAX50, TRUE);
 				snprintf(buffer, MAX560,"Modifica el nombre de la sucursal numero %d de '%s' a '%s'", sucursal->getCodigo(sucursal) ,sucursal->getNombre(sucursal), nombre);
 				sucursal->setNombre(sucursal,nombre);
 				free(nombre);
@@ -75,21 +81,21 @@ void modificarSucursal(){
 			}
 		
 			case 2: {
-				char *direccion = leerCadena("Ingrese direccion de la sucursal:\n",MAX120);
+				char *direccion = leerCadena("Ingrese direccion de la sucursal:\n",MAX120, TRUE);
 				snprintf(buffer, MAX560,"Modifica la direccion de la sucursal numero %d de '%s' a '%s'", sucursal->getCodigo(sucursal) ,sucursal->getDireccion(sucursal), direccion);
 				sucursal->setDireccion(sucursal,direccion);
 				free(direccion);
 				break;
 			}
 			case 3: {
-				char* telefono = leerCadena("Ingrese telefono de la sucursal:\n",MAX25);
+				char* telefono = leerCadena("Ingrese telefono de la sucursal:\n",MAX25, TRUE);
 				snprintf(buffer, MAX560,"Modifica el telefono de la sucursal numero %d de '%s' a '%s'", sucursal->getCodigo(sucursal) ,sucursal->getTelefono(sucursal), telefono);
 				sucursal->setTelefono(sucursal,telefono);
 				free(telefono);
 				break;
 			}
 			case 4:{
-				int codpostal = leerEntero("Ingrese el codigo postal de la localidad: \n",1,  0, 10000, -1);
+				int codpostal = leerEntero("Ingrese el codigo postal de la localidad: \n", TRUE ,  0, 10000, -1);
 				obj_Localidad *localidadActual = Localidad_new();
 				obj_Localidad *localidadSucAnterior;
 				
@@ -108,10 +114,11 @@ void modificarSucursal(){
 		if(sucursal->saveObj(sucursal) == true){
 			printf("Modificacion exitosa.\n");
 			registrarEvento("Sucursal", buffer);
-			system("PAUSE");
 		}
 		else
 			printf("Error al modificar sucursal.\n");
+			
+		system("PAUSE");	
 	}
 	sucursal->destroyInternal(sucursal);
 	destroyObj(sucursal);

@@ -8,7 +8,7 @@ THIS(obj_Banco)// crea definicion de funcion this para este modulo. .. Macro en 
 char *toString_BancoImpl(void *self)
 {
      obj_Banco *obj=this(self);      
-     int size = snprintf(NULL, 0, "%d - %s - %s\n", obj->getCodigo(obj), obj->getNombre(obj),obj->getDireccion(obj));
+     int size = MAX_SQL;
 	 char *resultado = malloc(size +1);
      if (resultado == NULL) return NULL;
      sprintf(resultado, "%d - %s - %s\n", obj->getCodigo(obj), obj->getNombre(obj),obj->getDireccion(obj));

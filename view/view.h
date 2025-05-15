@@ -1,6 +1,6 @@
 #define LEN(x) (sizeof(x) / sizeof(x[0]))
 
 int leerEntero(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso );
-char *leerCadena(char *msj_pant,int max_cad);
+char *leerCadena(char *msj_pant,int max_cad, int clear);
 float leerFloat(char *msj_pant,bool clear, int minVal, int maxVal, int corteIngreso);
 
