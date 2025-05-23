@@ -131,7 +131,7 @@ void *(*fcConstructor) () //puntero a funcion del constructor para crear instanc
 				setValue(obj,i,dato);
 				//free(dato);
 		 	  }
-		 	  ((Object*)self)->isNewObj=false;
+		 	  ((Object*)obj)->isNewObj=false;
 		 	  if(!doFindByKey)
 		 	    ((Object **)*list)[rowi] = obj;
 			}

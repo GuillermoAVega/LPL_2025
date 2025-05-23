@@ -85,7 +85,7 @@ void listProdMasPedidos(){
 		
 		if(confirma("Desea guardar el listado en un archivo? s/n")){
 
-			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200);
+			char *nombreArchivo = leerCadena("Ingrese el nombre del archivo: ", 200, FALSE);
 			
 			FILE *archivo = fopen(nombreArchivo, "w");
 			

@@ -23,8 +23,8 @@ char  *toString_DetFacturaImpl(void *self)
      	destroyObj(producto);
 		return NULL;
 	 } 
-     sprintf(resultado, "Codigo factura: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
-  obj->getCodFactura(obj), obj->getCodProducto(obj), producto->getDescripcion(producto),producto->getPrecio(producto),obj->getCantidad(obj));
+     sprintf(resultado, "Codigo factura: %d - Renglon: %d - Producto: %d %s - Precio Unitario: %.2f - Cantidad: %d\n",
+  obj->getCodFactura(obj), obj->getRenglon(obj),obj->getCodProducto(obj), producto->getDescripcion(producto),producto->getPrecio(producto),obj->getCantidad(obj));
     
      destroyObj(producto);
  return resultado;

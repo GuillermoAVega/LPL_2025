@@ -85,7 +85,7 @@ char *getFecha();
 char *getFechaHora();
 //definicion de tipos de punteros a funcion que puede tener un pseudoObjeto
 typedef int  (*findAllPtr)(void *self, void **list,char *criteria);
-typedef void (*toStringPtr)(void *self);
+typedef char *(*toStringPtr)(void *self);
 typedef bool (*getIsNewObjPtr)(void *self);
 typedef bool (*saveObjPtr)(void *self);
 typedef void (*destroyInternalPtr)(void *self);
